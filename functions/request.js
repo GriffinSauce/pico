@@ -23,11 +23,10 @@ Return output:
 exports.handler = function(event, context, callback) {
   // your server-side functionality
   callback(null, {
-    isBase64Encoded: false,
     statusCode: 200,
     // "headers": { "headerName": "headerValue", ... },
-    body: {
+    body: JSON.stringify({
       hello: 'world',
-    },
+    }),
   });
 };
