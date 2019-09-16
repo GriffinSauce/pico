@@ -22,12 +22,12 @@ Return output:
 
 exports.handler = function(event, context, callback) {
   // your server-side functionality
-  return {
+  callback(null, {
     isBase64Encoded: false,
     statusCode: 200,
     // "headers": { "headerName": "headerValue", ... },
     body: {
       hello: 'world',
     },
-  };
+  });
 };
