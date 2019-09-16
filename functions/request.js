@@ -43,4 +43,8 @@ exports.handler = function(event, context, callback) {
       body: JSON.stringify(mockRequest),
     });
   }
+
+  callback(null, {
+    statusCode: 404,
+  });
 };
