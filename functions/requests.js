@@ -39,7 +39,9 @@ exports.handler = function(event, context, callback) {
               'Access-Control-Allow-Origin': '*',
             },
       statusCode: 200,
-      body: JSON.stringify(mockRequest),
+      body: JSON.stringify({
+        request: mockRequest,
+      }),
     });
   }
 
@@ -52,7 +54,9 @@ exports.handler = function(event, context, callback) {
               'Access-Control-Allow-Origin': '*',
             },
       statusCode: 200,
-      body: JSON.stringify(mockRequest),
+      body: JSON.stringify({
+        request: mockRequest,
+      }),
     });
   }
 

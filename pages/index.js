@@ -1,22 +1,17 @@
 import react, { useState } from 'react';
-import axios from 'axios';
+import { createRequest } from '~/lib/api';
 
 const baseUrl =
   process.env === 'production'
     ? 'https://photo-request.netlify.com/'
     : 'http://localhost:3000';
 
-const baseFunctionsUrl =
-  process.env === 'production'
-    ? 'https://photo-request.netlify.com/.netlify/functions'
-    : 'http://localhost:9000';
-
 function Home() {
   const [link, setLink] = useState();
 
   const onGetLink = async () => {
-    const response = await axios.get(`${baseFunctionsUrl}/request`);
-    const { slug } = response.data;
+    const request = await createRequest();
+    const { slug } = request;
     setLink(`${baseUrl}/${slug}/upload`);
   };
 

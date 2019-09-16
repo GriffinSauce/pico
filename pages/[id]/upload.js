@@ -1,17 +1,26 @@
 import react from 'react';
-import { useRouter } from 'next/router';
-import Uploader from '../../components/Uploader';
+import { getRequest } from '~/lib/api';
+import Uploader from '~/components/Uploader';
 
-function UploadPage() {
-  const router = useRouter();
-  const { requestId } = router.query;
+const baseFunctionsUrl =
+  process.env === 'production'
+    ? 'https://photo-request.netlify.com/.netlify/functions'
+    : 'http://localhost:9000';
+
+function UploadPage({ request }) {
   return (
     <div>
-      <h1>Get shit!</h1>
+      <h1>{request.description}</h1>
+      <p>{request.requester.name}</p>
 
-      <Uploader requestId={requestId} />
+      <Uploader requestId={request.slug} />
     </div>
   );
 }
+
+UploadPage.getInitialProps = async ({ query: { id } }) => {
+  const request = await getRequest({ id });
+  return { request };
+};
 
 export default UploadPage;
