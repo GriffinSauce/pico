@@ -30,5 +30,5 @@ function Home() {
     </div>
   );
 }
-// "E_gxfcJsRV6*apYBFUrP"
+
 export default Home;
