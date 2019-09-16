@@ -6,23 +6,27 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "postinstall": "netlify-lambda install functions",
     "build-next-static": "next build && next export --outdir=build",
-    "build-lambda": "netlify-lambda build functions",
+    "build-lambda": "netlify-lambda build functions -c ./webpack.functions.js",
     "build": "yarn build-next-static && yarn build-lambda",
-    "dev-next": "next",
-    "dev-lambda": "netlify-lambda serve functions",
+    "dev-next": "PORT=3000 node server.js",
+    "dev-lambda": "netlify-lambda serve functions -c ./webpack.functions.js",
     "dev": "yarn dev-next & yarn dev-lambda"
   },
   "dependencies": {
     "@uploadcare/react-widget": "^1.0.0",
     "axios": "^0.19.0",
-    "babel-plugin-root-import": "^6.4.1",
+    "faunadb": "2.7.0",
+    "https": "^1.0.0",
+    "netlify-lambda": "^1.6.3",
     "next": "^9.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "firebase-tools": "^7.3.2",
-    "netlify-lambda": "^1.6.3"
+    "babel-plugin-root-import": "^6.4.1",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.20.0"
   }
 }

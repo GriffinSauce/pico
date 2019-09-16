@@ -1,3 +1,11 @@
+import faunadb from 'faunadb';
+import getId from './utils/getId';
+
+const q = faunadb.query;
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SERVER_SECRET,
+});
+
 /*
 
 Input event:
@@ -20,47 +28,70 @@ Return output:
 
 */
 
-const mockRequest = {
-  requester: {
-    name: 'Peter',
-  },
-  description: 'Boat trip pictures',
-  slug: 'af18e1eb-0d93-43e9-9b0f-44234415b0a0',
-  media: [],
+// Quicky hack for local CORS, can be solved with proxy
+const headers = {
+  'Access-Control-Allow-Origin': '*',
 };
 
-exports.handler = function(event, context, callback) {
+exports.handler = async (event, context) => {
+  console.log(event);
+
   if (event.httpMethod === 'POST') {
-    callback(null, {
-      headers:
-        process.env === 'production'
-          ? {}
-          : {
-              'Access-Control-Allow-Origin': '*',
-            },
+    console.log(`POST`);
+    const data = JSON.parse(event.body);
+
+    let response;
+    try {
+      response = await client.query(
+        q.Create(q.Collection('request'), { data }),
+      );
+    } catch (error) {
+      console.log('Error creating request', error);
+      return {
+        headers,
+        statusCode: 400,
+        body: JSON.stringify(error),
+      };
+    }
+    const { data: request, ref } = response;
+    return {
+      headers,
       statusCode: 200,
       body: JSON.stringify({
-        request: mockRequest,
+        request: {
+          id: ref.value.id,
+          ...request,
+        },
       }),
-    });
+    };
   }
 
   if (event.httpMethod === 'GET') {
-    callback(null, {
-      headers:
-        process.env === 'production'
-          ? {}
-          : {
-              'Access-Control-Allow-Origin': '*',
-            },
+    const id = getId(event.path);
+    console.log(`GET ${id}`);
+
+    let response;
+    try {
+      response = await client.query(q.Get(q.Ref(q.Collection('request'), id)));
+      console.log(response);
+    } catch (error) {
+      console.log('Error finding request', error);
+      return {
+        headers,
+        statusCode: 400,
+        body: JSON.stringify(error),
+      };
+    }
+    const { data: request, ref } = response;
+    return {
+      headers,
       statusCode: 200,
       body: JSON.stringify({
-        request: mockRequest,
+        request: {
+          id: ref.value.id,
+          ...request,
+        },
       }),
-    });
+    };
   }
-
-  callback(null, {
-    statusCode: 404,
-  });
 };

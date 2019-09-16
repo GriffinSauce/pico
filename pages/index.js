@@ -11,8 +11,7 @@ function Home() {
 
   const onGetLink = async () => {
     const request = await createRequest();
-    const { slug } = request;
-    setLink(`${baseUrl}/${slug}/upload`);
+    setLink(`${baseUrl}/${request.id}/upload`);
   };
 
   return (
