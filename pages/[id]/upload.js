@@ -8,6 +8,8 @@ const baseFunctionsUrl =
     : 'http://localhost:9000';
 
 function UploadPage({ request }) {
+  if (!request) return null;
+
   return (
     <div>
       <h1>{request.description}</h1>
@@ -19,6 +21,7 @@ function UploadPage({ request }) {
 }
 
 UploadPage.getInitialProps = async ({ query: { id } }) => {
+  if (!id) return {};
   const request = await getRequest({ id });
   return { request };
 };
