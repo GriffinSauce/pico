@@ -32,6 +32,12 @@ const mockRequest = {
 exports.handler = function(event, context, callback) {
   if (event.httpMethod === 'POST') {
     callback(null, {
+      headers:
+        process.env === 'production'
+          ? {}
+          : {
+              'Access-Control-Allow-Origin': '*',
+            },
       statusCode: 200,
       body: JSON.stringify(mockRequest),
     });
@@ -39,6 +45,12 @@ exports.handler = function(event, context, callback) {
 
   if (event.httpMethod === 'GET') {
     callback(null, {
+      headers:
+        process.env === 'production'
+          ? {}
+          : {
+              'Access-Control-Allow-Origin': '*',
+            },
       statusCode: 200,
       body: JSON.stringify(mockRequest),
     });
