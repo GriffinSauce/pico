@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "export": "next export",
+    "export": "next export --outdir=build",
     "build-static": "yarn build && yarn export",
     "start": "next start"
   },
