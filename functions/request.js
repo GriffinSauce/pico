@@ -20,13 +20,27 @@ Return output:
 
 */
 
+const mockRequest = {
+  requester: {
+    name: 'Peter',
+  },
+  description: 'Boat trip pictures',
+  slug: 'af18e1eb-0d93-43e9-9b0f-44234415b0a0',
+  media: [],
+};
+
 exports.handler = function(event, context, callback) {
-  // your server-side functionality
-  callback(null, {
-    statusCode: 200,
-    // "headers": { "headerName": "headerValue", ... },
-    body: JSON.stringify({
-      hello: 'world',
-    }),
-  });
+  if (event.httpMethod === 'POST') {
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(mockRequest),
+    });
+  }
+
+  if (event.httpMethod === 'GET') {
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(mockRequest),
+    });
+  }
 };

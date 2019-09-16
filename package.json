@@ -6,21 +6,21 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "export": "next export --outdir=build",
-    "build-static": "yarn build && yarn export",
-    "start": "next start"
+    "build-next-static": "next build && next export --outdir=build",
+    "build-lambda": "netlify-lambda build functions",
+    "build": "yarn build-next-static && yarn build-lambda",
+    "dev-next": "next",
+    "dev-lambda": "netlify-lambda serve functions",
+    "dev": "yarn dev-next & yarn dev-lambda"
   },
   "dependencies": {
-    "@capsureit/uppy-cloudinary": "^0.1.4",
     "@uploadcare/react-widget": "^1.0.0",
-    "@uppy/react": "^1.3.0",
     "next": "^9.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "netlify-lambda": "^1.6.3",
     "firebase-tools": "^7.3.2"
   }
 }
