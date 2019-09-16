@@ -1,10 +1,18 @@
-import react from 'react';
+import react, { useState } from 'react';
 import Uploader from '../components/Uploader';
 
 function Home() {
+  const [link, setLink] = useState();
+
+  const onGetLink = () => {};
+
   return (
     <div>
-      <h1>Get shit!</h1>
+      <h1>Get photos</h1>
+
+      <p>{link}</p>
+
+      <button onClick={onGetLink}>Get link</button>
     </div>
   );
 }

@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "export": "next export",
+    "build-static": "yarn build && yarn export",
     "start": "next start"
   },
   "dependencies": {
