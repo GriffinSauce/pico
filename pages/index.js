@@ -1,27 +1,53 @@
 import react, { useState } from 'react';
+import copy from 'copy-to-clipboard';
 import { createRequest } from '~/lib/api';
 
 const baseUrl =
   process.env === 'production'
-    ? 'https://photo-request.netlify.com/'
+    ? 'https://photo-request.netlify.com'
     : 'http://localhost:3000';
 
 function Home() {
-  const [link, setLink] = useState();
+  const [name, setName] = useState('Peter');
+  const [description, setDescription] = useState('Boattrip');
+  const [copied, setCopied] = useState(false);
 
-  const onGetLink = async () => {
-    const request = await createRequest();
-    setLink(`${baseUrl}/${request.id}/upload`);
+  const onCopyLink = async () => {
+    const request = await createRequest({
+      requester: {
+        name,
+      },
+      description,
+    });
+    const link = `${baseUrl}/${request.id}/upload`;
+    copy(link);
+    setCopied(true);
   };
 
   return (
-    <div>
+    <>
       <h1>Get photos</h1>
 
-      <p>{link}</p>
+      <p>
+        <label htmlFor="name">Name</label>
+        <input id="name" value={name} onChange={e => setName(e.target.value)} />
+      </p>
 
-      <button onClick={onGetLink}>Get link</button>
-    </div>
+      <p>
+        <label htmlFor="description">Description</label>
+        <input
+          id="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+      </p>
+
+      {copied ? (
+        <p>Copied to clipboard!</p>
+      ) : (
+        <button onClick={onCopyLink}>Get link</button>
+      )}
+    </>
   );
 }
 

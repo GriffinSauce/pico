@@ -1,4 +1,4 @@
-import react from 'react';
+import react, { useState } from 'react';
 import { getRequest } from '~/lib/api';
 import Uploader from '~/components/Uploader';
 
@@ -10,13 +10,38 @@ const baseFunctionsUrl =
 function UploadPage({ request }) {
   if (!request) return null;
 
-  return (
-    <div>
-      <h1>{request.description}</h1>
-      <p>{request.requester.name}</p>
+  const [name, setName] = useState('Steve');
+  const [media, setMedia] = useState(request.media || []);
 
-      <Uploader requestId={request.slug} />
-    </div>
+  const addMedia = newMedia => {
+    setMedia([...media, ...newMedia]);
+  };
+
+  return (
+    <>
+      <h1>{request.description}</h1>
+
+      <p>Requested by {request.requester.name}</p>
+
+      <p>
+        <label htmlFor="name">Name</label>
+        <input id="name" value={name} onChange={e => setName(e.target.value)} />
+      </p>
+
+      <Uploader requestId={request.slug} onChange={addMedia} />
+
+      <div>
+        {media.map(item => (
+          <img src={item.url} />
+        ))}
+      </div>
+
+      <style jsx>{`
+        img {
+          width: 33%;
+        }
+      `}</style>
+    </>
   );
 }
 
