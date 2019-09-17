@@ -1,37 +1,5 @@
-import faunadb from 'faunadb';
-import getId from './utils/getId';
-
-const q = faunadb.query;
-const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SERVER_SECRET,
-});
-
-/*
-
-Input event:
-{
-    "path": "Path parameter",
-    "httpMethod": "Incoming request's method name"
-    "headers": {Incoming request headers}
-    "queryStringParameters": {query string parameters }
-    "body": "A JSON string of the request payload."
-    "isBase64Encoded": "A boolean flag to indicate if the applicable request payload is Base64-encode"
-}
-
-Return output:
-{
-    "isBase64Encoded": true|false,
-    "statusCode": httpStatusCode,
-    "headers": { "headerName": "headerValue", ... },
-    "body": "..."
-}
-
-*/
-
-// Quicky hack for local CORS, can be solved with proxy
-const headers = {
-  'Access-Control-Allow-Origin': '*',
-};
+const Request = require('./schemas/Request');
+const getId = require('./utils/getId');
 
 exports.handler = async (event, context) => {
   console.log(event);
@@ -39,29 +7,20 @@ exports.handler = async (event, context) => {
   if (event.httpMethod === 'POST') {
     console.log(`POST`);
     const data = JSON.parse(event.body);
-
-    let response;
+    const request = new Request(data);
     try {
-      response = await client.query(
-        q.Create(q.Collection('request'), { data }),
-      );
+      await request.save();
     } catch (error) {
       console.log('Error creating request', error);
       return {
-        headers,
         statusCode: 400,
         body: JSON.stringify(error),
       };
     }
-    const { data: request, ref } = response;
     return {
-      headers,
       statusCode: 200,
       body: JSON.stringify({
-        request: {
-          id: ref.value.id,
-          ...request,
-        },
+        request,
       }),
     };
   }
@@ -70,27 +29,20 @@ exports.handler = async (event, context) => {
     const id = getId(event.path);
     console.log(`GET ${id}`);
 
-    let response;
+    let request;
     try {
-      response = await client.query(q.Get(q.Ref(q.Collection('request'), id)));
-      console.log(response);
+      request = await Request.findById(id);
     } catch (error) {
       console.log('Error finding request', error);
       return {
-        headers,
         statusCode: 400,
         body: JSON.stringify(error),
       };
     }
-    const { data: request, ref } = response;
     return {
-      headers,
       statusCode: 200,
       body: JSON.stringify({
-        request: {
-          id: ref.value.id,
-          ...request,
-        },
+        request,
       }),
     };
   }

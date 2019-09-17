@@ -8,11 +8,8 @@
   "scripts": {
     "postinstall": "netlify-lambda install functions",
     "build-next-static": "next build && next export --outdir=build",
-    "build-lambda": "netlify-lambda build functions -c ./webpack.functions.js",
     "build": "yarn build-next-static && yarn build-lambda",
-    "dev-next": "PORT=3000 node server.js",
-    "dev-lambda": "netlify-lambda serve functions -c ./webpack.functions.js",
-    "dev": "yarn dev-next & yarn dev-lambda"
+    "dev": "netlify dev --command=next --functions=functions"
   },
   "dependencies": {
     "@uploadcare/react-widget": "^1.0.0",
@@ -20,6 +17,8 @@
     "copy-to-clipboard": "^3.2.0",
     "faunadb": "2.7.0",
     "https": "^1.0.0",
+    "mongoose": "^5.7.1",
+    "netlify-cli": "^2.15.0",
     "netlify-lambda": "^1.6.3",
     "next": "^9.0.5",
     "react": "^16.9.0",
