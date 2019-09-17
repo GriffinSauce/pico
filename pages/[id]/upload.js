@@ -1,5 +1,5 @@
 import react, { useState } from 'react';
-import { getRequest } from '~/lib/api';
+import * as api from '~/lib/api';
 import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl =
@@ -13,8 +13,14 @@ function UploadPage({ request }) {
   const [name, setName] = useState('Steve');
   const [media, setMedia] = useState(request.media || []);
 
-  const addMedia = newMedia => {
-    setMedia([...media, ...newMedia]);
+  const addMedia = async media => {
+    // setMedia([...media, ...newMedia]); // Maybe be optimistic?
+
+    const updatedMedia = await api.addMedia({
+      id: request.id,
+      media,
+    });
+    setMedia(updatedMedia);
   };
 
   return (
@@ -47,7 +53,7 @@ function UploadPage({ request }) {
 
 UploadPage.getInitialProps = async ({ query: { id } }) => {
   if (!id) return {};
-  const request = await getRequest({ id });
+  const request = await api.getRequest({ id });
   return { request };
 };
 

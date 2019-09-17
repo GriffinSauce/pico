@@ -1,6 +1,6 @@
 import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
-import { createRequest } from '~/lib/api';
+import * as api from '~/lib/api';
 
 const baseUrl =
   process.env === 'production'
@@ -13,7 +13,7 @@ function Home() {
   const [copied, setCopied] = useState(false);
 
   const onCopyLink = async () => {
-    const request = await createRequest({
+    const request = await api.createRequest({
       requester: {
         name,
       },

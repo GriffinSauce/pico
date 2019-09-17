@@ -1,8 +1,6 @@
 const mongoose = require('../lib/mongoose');
 const { Schema } = mongoose;
 
-console.log('Schema', Schema);
-
 const Request = new Schema(
   {
     requester: {

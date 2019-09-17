@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "netlify-lambda install functions",
     "build-next-static": "next build && next export --outdir=build",
     "build": "yarn build-next-static && yarn build-lambda",
     "dev": "netlify dev --command=next --functions=functions"
@@ -15,18 +14,14 @@
     "@uploadcare/react-widget": "^1.0.0",
     "axios": "^0.19.0",
     "copy-to-clipboard": "^3.2.0",
-    "faunadb": "2.7.0",
-    "https": "^1.0.0",
     "mongoose": "^5.7.1",
     "netlify-cli": "^2.15.0",
-    "netlify-lambda": "^1.6.3",
     "next": "^9.0.5",
+    "path-to-regexp": "^3.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "babel-plugin-root-import": "^6.4.1",
-    "express": "^4.17.1",
-    "http-proxy-middleware": "^0.20.0"
+    "babel-plugin-root-import": "^6.4.1"
   }
 }

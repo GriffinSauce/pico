@@ -6,7 +6,7 @@ const password = process.env.MONGO_PASSWORD;
 
 mongoose.connect(
   `mongodb+srv://${user}:${password}@photo-request-bdwz4.mongodb.net/test?retryWrites=true&w=majority`,
-  { useNewUrlParser: true },
+  { useNewUrlParser: true, useUnifiedTopology: true },
 );
 
 db.on('error', error => {
