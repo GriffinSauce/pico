@@ -1,5 +1,7 @@
 /**
- *  Express-like router for lambda functions
+ * Express-like router for lambda functions
+ * TODO: mimic req better by translating event props
+ * TODO: document handlers and return value
  *
  * @example
  * const router = require('./utils/router')();
