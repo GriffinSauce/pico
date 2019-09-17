@@ -1,11 +1,9 @@
-const pathToRegexp = require('path-to-regexp');
 const Request = require('./schemas/Request');
-const getRequest = require('./utils/getRequest');
+const router = require('./lib/router')();
 
 exports.handler = async (event, context) => {
-  const requestPostReq = getRequest(event, 'POST', '/requests');
-  if (requestPostReq) {
-    const data = JSON.parse(event.body);
+  router.post('/requests', async req => {
+    const data = JSON.parse(req.event.body);
     const request = new Request(data);
     try {
       await request.save();
@@ -22,13 +20,13 @@ exports.handler = async (event, context) => {
         request,
       }),
     };
-  }
+  });
 
-  const mediaPostReq = getRequest(event, 'POST', '/requests/:id/media');
-  if (mediaPostReq) {
+  router.post('/requests/:id/media', async req => {
     const {
       params: { id },
-    } = mediaPostReq;
+      event,
+    } = req;
 
     const { media } = JSON.parse(event.body);
     console.log('pushing', media);
@@ -59,13 +57,12 @@ exports.handler = async (event, context) => {
         media: request.media,
       }),
     };
-  }
+  });
 
-  const requestGetReq = getRequest(event, 'GET', '/requests/:id');
-  if (requestGetReq) {
+  router.get('/requests/:id', async req => {
     const {
       params: { id },
-    } = requestGetReq;
+    } = req;
 
     let request;
     try {
@@ -83,10 +80,14 @@ exports.handler = async (event, context) => {
         request,
       }),
     };
-  }
+  });
 
   // Not matched
-  return {
-    statusCode: 404,
-  };
+  router.get('*', req => {
+    return {
+      statusCode: 404,
+    };
+  });
+
+  return router.exec(event, context);
 };
