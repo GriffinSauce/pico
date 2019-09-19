@@ -14,7 +14,7 @@ db.on('error', error => {
 });
 
 db.once('open', error => {
-  console.info('mongoose connected!');
+  if (process.env.NODE_ENV !== 'test') console.info('mongoose connected!');
 });
 
 module.exports = mongoose;

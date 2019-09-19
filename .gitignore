@@ -6,3 +6,4 @@ node_modules
 .envrc
 build
 build-functions
+yarn-error.log

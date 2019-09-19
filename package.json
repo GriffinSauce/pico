@@ -8,7 +8,11 @@
   "scripts": {
     "build-next-static": "next build && next export --outdir=build",
     "build": "yarn build-next-static && yarn build-lambda",
-    "dev": "netlify dev --command=next --functions=functions"
+    "dev": "netlify dev --command=next --functions=functions",
+    "test": "NODE_ENV=test jest",
+    "test-watch": "NODE_ENV=test yarn run test --watch",
+    "test-cover": "NODE_ENV=test yarn run test --coverage",
+    "test-ci": "NODE_ENV=test yarn run test --ci --maxWorkers=4"
   },
   "dependencies": {
     "@uploadcare/react-widget": "^1.0.0",
@@ -22,6 +26,9 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "babel-plugin-root-import": "^6.4.1"
+    "babel-plugin-root-import": "^6.4.1",
+    "jest": "^24.9.0",
+    "jest-environment-node": "^24.9.0",
+    "mongodb-memory-server": "^5.2.3"
   }
 }

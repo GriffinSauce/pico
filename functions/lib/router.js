@@ -23,6 +23,9 @@ const pathToRegexp = require('path-to-regexp');
 const cleanPath = path => path.replace('/.netlify/functions', '');
 const getPath = event => cleanPath(event.path);
 
+// Convert wildcard character to match whatever
+const convertWildcard = path => path.replace('*', '(.*)');
+
 const parseParams = (match, keys) =>
   keys.reduce((memo, key, index) => {
     return {
@@ -54,7 +57,7 @@ const createRouter = () => {
         if (event.httpMethod !== method) return;
 
         const keys = [];
-        const regexp = pathToRegexp(path, keys);
+        const regexp = pathToRegexp(convertWildcard(path), keys);
         const match = regexp.exec(getPath(event));
 
         if (!match) return;
