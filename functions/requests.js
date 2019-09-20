@@ -83,7 +83,7 @@ const router = require('./lib/router')();
   });
 
   // Not matched
-  router.get('*', req => {
+  router.any('*', req => {
     return {
       statusCode: 404,
     };
