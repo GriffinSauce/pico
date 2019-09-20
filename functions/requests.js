@@ -1,7 +1,7 @@
 const Request = require('./schemas/Request');
 const router = require('./lib/router')();
 
-exports.handler = async (event, context) => {
+// @TODO: fix indent
   router.post('/requests', async req => {
     const data = JSON.parse(req.event.body);
     const request = new Request(data);
@@ -89,5 +89,4 @@ exports.handler = async (event, context) => {
     };
   });
 
-  return router.exec(event, context);
-};
+exports.handler = router.handle;
