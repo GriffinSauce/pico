@@ -1,0 +1,30 @@
+version: 2
+
+jobs:
+  test-job:
+    working_directory: ~
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install modules
+          command: yarn install
+      - run:
+          name: Build
+          command: yarn run build
+      - run:
+          name: Jest test
+          command: yarn test-ci
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test-job
