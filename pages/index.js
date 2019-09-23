@@ -3,7 +3,6 @@ import copy from 'copy-to-clipboard';
 import * as api from '~/lib/api';
 
 const baseUrl = process.env.URL;
-  
 
 function Home() {
   const [name, setName] = useState('Peter');
