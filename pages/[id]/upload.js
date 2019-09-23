@@ -2,10 +2,7 @@ import react, { useState } from 'react';
 import * as api from '~/lib/api';
 import Uploader from '~/components/Uploader';
 
-const baseFunctionsUrl =
-  process.env === 'production'
-    ? 'https://photo-request.netlify.com/.netlify/functions'
-    : 'http://localhost:9000';
+const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
 function UploadPage({ request }) {
   if (!request) return null;

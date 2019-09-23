@@ -2,10 +2,8 @@ import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import * as api from '~/lib/api';
 
-const baseUrl =
-  process.env === 'production'
-    ? 'https://photo-request.netlify.com'
-    : 'http://localhost:3000';
+const baseUrl = process.env.URL;
+  
 
 function Home() {
   const [name, setName] = useState('Peter');

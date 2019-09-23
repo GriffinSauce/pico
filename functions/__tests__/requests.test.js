@@ -1,6 +1,6 @@
 /* eslint-env jest */
-const requests = require('./requests');
-const { connectDb, clearDb, disconnectDb } = require('../test/dbHelpers');
+const requests = require('../requests');
+const { connectDb, clearDb, disconnectDb } = require('../../test/dbHelpers');
 
 beforeAll(connectDb);
 beforeEach(clearDb);

@@ -1,4 +1,4 @@
 [build]
   publish = "./build"
-  functions = "./build-functions"
+  functions = "./functions"
   command = "yarn build"
