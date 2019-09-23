@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    URL: 'URL',
+    URL: process.env.URL,
   },
 };
