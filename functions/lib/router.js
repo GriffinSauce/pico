@@ -76,7 +76,7 @@ const createRouter = () => {
       handlers.some(({ method, path, handler }) => {
         if (method !== ANY && event.httpMethod !== method) return;
 
-        const { match, params } = getMatch({ event, path });
+        const { match, params } = matchPath({ event, path });
         if (!match) return;
 
         res = handler({ params, event, context });
