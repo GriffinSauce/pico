@@ -2,9 +2,7 @@ import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import * as api from '~/lib/api';
 
-const baseUrl = process.env.URL;
-
-function Home() {
+function Home({ url }) {
   const [name, setName] = useState('Peter');
   const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
@@ -16,7 +14,7 @@ function Home() {
       },
       description,
     });
-    const link = `${baseUrl}/${request.id}/upload`;
+    const link = `${url}/${request.id}/upload`;
     copy(link);
     setCopied(true);
   };
@@ -47,5 +45,14 @@ function Home() {
     </>
   );
 }
+
+Home.getInitialProps = async ({ req }) => {
+  const host = req ? req.headers.host : window.location.hostname;
+  const protocol = host.indexOf('localhost') ? 'http:' : 'https:';
+  const url = `${protocol}//${host}`;
+  return {
+    url,
+  };
+};
 
 export default Home;
