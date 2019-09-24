@@ -3,6 +3,7 @@ import copy from 'copy-to-clipboard';
 import api from '~/lib/api';
 
 function Home({ url, session }) {
+  console.log(url)
   const [name, setName] = useState('Peter');
   const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
