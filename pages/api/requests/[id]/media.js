@@ -3,11 +3,8 @@ const Request = require('~/schemas/Request');
 module.exports = async (req, res) => {
   const {
     query: { id },
-    body,
+    body: { media },
   } = req;
-
-  const { media } = body;
-  console.log('pushing', media);
 
   let request;
   try {
