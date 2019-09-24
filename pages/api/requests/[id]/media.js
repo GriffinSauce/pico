@@ -1,6 +1,6 @@
 const Request = require('~/schemas/Request');
 
-module.exports = async req => {
+module.exports = async (req, res) => {
   const {
     query: { id },
     body,
