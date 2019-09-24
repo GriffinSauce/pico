@@ -1,10 +1,11 @@
 import react, { useState } from 'react';
-import api from '~/lib/api';
+import createApi from '~/lib/createApi';
+import hostFromReq from '~/lib/hostFromReq';
 import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
-function UploadPage({ host, session, request }) {
+function UploadPage({ api, request }) {
   if (!request) return null;
 
   const [name, setName] = useState('Steve');
@@ -13,7 +14,7 @@ function UploadPage({ host, session, request }) {
   const addMedia = async media => {
     // setMedia([...media, ...newMedia]); // Maybe be optimistic?
 
-    const updatedMedia = await api({ host, session }).addMedia({
+    const updatedMedia = await api.addMedia({
       id: request.id,
       media,
     });
@@ -51,18 +52,15 @@ function UploadPage({ host, session, request }) {
 UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   if (!id) return {};
 
-  const hostname = req ? req.headers.host : window.location.hostname;
-  const protocol = hostname.includes('localhost') ? 'http:' : 'https:';
-  const host = `${protocol}//${hostname}`;
-  const session = req && req.session ? req.session : null;
+  const api = createApi({ req })
 
   let request;
   try {
-    request = await api({ host, session }).getRequest({ id });
+    request = await api.getRequest({ id });
   } catch (error) {
     throw error;
   }
-  return { host, session, request };
+  return { api, request };
 };
 
 export default UploadPage;
