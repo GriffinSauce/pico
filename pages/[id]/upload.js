@@ -48,7 +48,7 @@ function UploadPage({ request }) {
   );
 }
 
-UploadPage.getInitialProps = async ({ query: { id } }) => {
+UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   if (!id) return {};
 
   const hostname = req ? req.headers.host : window.location.hostname;
