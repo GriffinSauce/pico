@@ -50,7 +50,12 @@ function UploadPage({ request }) {
 
 UploadPage.getInitialProps = async ({ query: { id } }) => {
   if (!id) return {};
-  const request = await api.getRequest({ id });
+  let request;
+  try {
+    request = await api.getRequest({ id });
+  } catch (error) {
+    throw error;
+  }
   return { request };
 };
 
