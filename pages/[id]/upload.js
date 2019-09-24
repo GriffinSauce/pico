@@ -52,7 +52,7 @@ UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   if (!id) return {};
 
   const hostname = req ? req.headers.host : window.location.hostname;
-  const protocol = hostname.indexOf('localhost') ? 'http:' : 'https:';
+  const protocol = hostname.includes('localhost') ? 'http:' : 'https:';
   const host = `${protocol}//${hostname}`;
   const session = req && req.session ? req.session : null;
 
