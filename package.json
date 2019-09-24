@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build-next-static": "next build && next export --outdir=build",
-    "build": "yarn build-next-static",
+    "build-static": "next build && next export --outdir=build",
+    "build": "next build",
     "dev": "netlify dev --command=next --functions=functions",
     "test": "NODE_ENV=test jest",
     "test-watch": "NODE_ENV=test yarn run test --watch",
