@@ -3,8 +3,8 @@ const glob = require('glob');
 
 module.exports = {
   env: {
-    MONGO_PASSWORD: '@environment-mongo_password',
-    MONGO_USER: '@environment-mongo_user',
+    MONGO_PASSWORD: process.env.MONGO_PASSWORD,
+    MONGO_USER: process.env.MONGO_USER,
   },
   webpack: (config, { dev }) => {
     config.module.rules.push({
