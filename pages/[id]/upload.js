@@ -1,5 +1,5 @@
 import react, { useState } from 'react';
-import * as api from '~/lib/api';
+import api from '~/lib/api';
 import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
@@ -50,9 +50,15 @@ function UploadPage({ request }) {
 
 UploadPage.getInitialProps = async ({ query: { id } }) => {
   if (!id) return {};
+
+  const host = req ? req.headers.host : window.location.hostname;
+  const protocol = host.indexOf('localhost') ? 'http:' : 'https:';
+  const url = `${protocol}//${host}`;
+  const session = req && req.session ? req.session : null;
+
   let request;
   try {
-    request = await api.getRequest({ id });
+    request = await api({ url, session }).getRequest({ id });
   } catch (error) {
     throw error;
   }
