@@ -4,7 +4,7 @@ import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
-function UploadPage({ request }) {
+function UploadPage({ host, session, request }) {
   if (!request) return null;
 
   const [name, setName] = useState('Steve');
@@ -13,7 +13,7 @@ function UploadPage({ request }) {
   const addMedia = async media => {
     // setMedia([...media, ...newMedia]); // Maybe be optimistic?
 
-    const updatedMedia = await api.addMedia({
+    const updatedMedia = await api({ host, session }).addMedia({
       id: request.id,
       media,
     });
@@ -62,7 +62,7 @@ UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   } catch (error) {
     throw error;
   }
-  return { request };
+  return { host, session, request };
 };
 
 export default UploadPage;
