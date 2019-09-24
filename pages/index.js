@@ -2,20 +2,19 @@ import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import api from '~/lib/api';
 
-function Home({ url, session }) {
-  console.log(url)
+function Home({ host, session }) {
   const [name, setName] = useState('Peter');
   const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
 
   const onCopyLink = async () => {
-    const request = await api({ url, session }).createRequest({
+    const request = await api({ host, session }).createRequest({
       requester: {
         name,
       },
       description,
     });
-    const link = `${url}/${request.id}/upload`;
+    const link = `${host}/${request.id}/upload`;
     copy(link);
     setCopied(true);
   };
@@ -48,12 +47,12 @@ function Home({ url, session }) {
 }
 
 Home.getInitialProps = async ({ req }) => {
-  const host = req ? req.headers.host : window.location.hostname;
-  const protocol = host.indexOf('localhost') ? 'http:' : 'https:';
-  const url = `${protocol}//${host}`;
+  const hostname = req ? req.headers.host : window.location.hostname;
+  const protocol = hostname.indexOf('localhost') ? 'http:' : 'https:';
+  const host = `${protocol}//${hostname}`;
   const session = req && req.session ? req.session : null;
   return {
-    url,
+    host,
     session,
   };
 };

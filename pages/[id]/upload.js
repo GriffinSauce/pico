@@ -51,14 +51,14 @@ function UploadPage({ request }) {
 UploadPage.getInitialProps = async ({ query: { id } }) => {
   if (!id) return {};
 
-  const host = req ? req.headers.host : window.location.hostname;
-  const protocol = host.indexOf('localhost') ? 'http:' : 'https:';
-  const url = `${protocol}//${host}`;
+  const hostname = req ? req.headers.host : window.location.hostname;
+  const protocol = hostname.indexOf('localhost') ? 'http:' : 'https:';
+  const host = `${protocol}//${hostname}`;
   const session = req && req.session ? req.session : null;
 
   let request;
   try {
-    request = await api({ url, session }).getRequest({ id });
+    request = await api({ host, session }).getRequest({ id });
   } catch (error) {
     throw error;
   }
