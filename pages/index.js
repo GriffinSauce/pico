@@ -48,7 +48,7 @@ function Home({ host, session }) {
 
 Home.getInitialProps = async ({ req }) => {
   const hostname = req ? req.headers.host : window.location.hostname;
-  const protocol = hostname.indexOf('localhost') ? 'http:' : 'https:';
+  const protocol = hostname.includes('localhost') ? 'http:' : 'https:';
   const host = `${protocol}//${hostname}`;
   const session = req && req.session ? req.session : null;
   return {
