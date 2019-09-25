@@ -42,7 +42,7 @@ function UploadPage({ host, request }) {
         ) : null}
       </section>
 
-      <Downloader media={media} />
+      <Downloader filename={request.id} media={media} />
 
       <Link href="/">
         <SmallButton>Make your own request</SmallButton>

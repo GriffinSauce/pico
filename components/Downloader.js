@@ -21,16 +21,15 @@ function urlToPromise(url) {
   });
 }
 
-export default ({ media }) => {
+export default ({ filename, media }) => {
   const [downloading, setDownloading] = useState(false);
-  const [status, setStatus] = useState();
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState();
 
   const doDownload = () => {
     setDownloading(true);
 
-    var zip = new JSZip();
+    const zip = new JSZip();
 
     media.forEach((mediaItem, index) => {
       zip.file(mediaItem.filename, urlToPromise(mediaItem.url), {
@@ -38,26 +37,18 @@ export default ({ media }) => {
       });
     });
 
-    // when everything has been downloaded, we can trigger the dl
+    // when everything has been downloaded, we can trigger the download
     zip
       .generateAsync({ type: 'blob' }, function updateCallback(metadata) {
-        var msg = 'progression : ' + metadata.percent.toFixed(2) + ' %';
-        if (metadata.currentFile) {
-          msg += ', current file = ' + metadata.currentFile;
-        }
-        setStatus(msg);
         setProgress(metadata.percent | 0);
       })
       .then(
-        function callback(blob) {
-          // see FileSaver.js
-          saveAs(blob, 'example.zip');
-
-          setStatus('done !');
+        blob => {
+          saveAs(blob, `${filename}.zip`); // see FileSaver.js
           setDownloading(false);
         },
-        function(e) {
-          setError(e);
+        err => {
+          setError(err);
         },
       );
   };
@@ -65,7 +56,7 @@ export default ({ media }) => {
   return (
     <>
       {downloading ? (
-        <div>{progress}%</div>
+        <span>{progress}%</span>
       ) : (
         <SmallButton disabled={!media.length} onClick={doDownload}>
           download all
