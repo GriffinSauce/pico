@@ -1,13 +1,14 @@
 import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
-import * as api from '~/lib/api';
+import createApi from '~/lib/createApi';
+import hostFromReq from '~/lib/hostFromReq';
 
-const baseUrl = process.env.URL;
-
-function Home() {
+function Home({ host }) {
   const [name, setName] = useState('Peter');
   const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
+
+  const api = createApi({ host });
 
   const onCopyLink = async () => {
     const request = await api.createRequest({
@@ -16,7 +17,7 @@ function Home() {
       },
       description,
     });
-    const link = `${baseUrl}/${request.id}/upload`;
+    const link = `${host}/${request.id}/upload`;
     copy(link);
     setCopied(true);
   };
@@ -47,5 +48,11 @@ function Home() {
     </>
   );
 }
+
+Home.getInitialProps = async ({ req }) => {
+  return {
+    host: hostFromReq(req),
+  };
+};
 
 export default Home;

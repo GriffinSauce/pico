@@ -1,11 +1,14 @@
 import react, { useState } from 'react';
-import * as api from '~/lib/api';
+import createApi from '~/lib/createApi';
+import hostFromReq from '~/lib/hostFromReq';
 import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
-function UploadPage({ request }) {
+function UploadPage({ host, request }) {
   if (!request) return null;
+
+  const api = createApi({ host });
 
   const [name, setName] = useState('Steve');
   const [media, setMedia] = useState(request.media || []);
@@ -48,10 +51,19 @@ function UploadPage({ request }) {
   );
 }
 
-UploadPage.getInitialProps = async ({ query: { id } }) => {
+UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   if (!id) return {};
-  const request = await api.getRequest({ id });
-  return { request };
+
+  const host = hostFromReq(req);
+  const api = createApi({ host });
+
+  let request;
+  try {
+    request = await api.getRequest({ id });
+  } catch (error) {
+    throw error;
+  }
+  return { host, request };
 };
 
 export default UploadPage;

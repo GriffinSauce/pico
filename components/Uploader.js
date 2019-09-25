@@ -6,7 +6,7 @@ const fileInfoToMedia = fileInfo => ({
   type: 'image',
 });
 
-export default ({ currentAvatar, onChange }) => {
+export default ({ onChange }) => {
   return (
     <>
       <Widget
