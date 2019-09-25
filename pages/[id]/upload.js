@@ -70,6 +70,14 @@ function UploadPage({ host, request }) {
           onMoveNextRequest={() =>
             setViewMediaIndex((viewMediaIndex + 1) % media.length)
           }
+          toolbarButtons={[
+            <a
+              className="lightbox-download"
+              href={`${media[viewMediaIndex].url}-/inline/no/`}
+            >
+              download
+            </a>,
+          ]}
         />
       )}
 
@@ -95,6 +103,16 @@ function UploadPage({ host, request }) {
 
         .media-item img {
           width: 100%;
+        }
+
+        .lightbox-download {
+          margin: 0 10px 0 0;
+          padding: 6px 12px 7px 12px;
+          color: #ddd;
+          font-size: 12px;
+          text-decoration: none;
+          border: 1px solid #ddd;
+          border-radius: 4px;
         }
       `}</style>
     </>
