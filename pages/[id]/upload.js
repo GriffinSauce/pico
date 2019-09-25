@@ -5,8 +5,10 @@ import Uploader from '~/components/Uploader';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
-function UploadPage({ api, request }) {
+function UploadPage({ host, request }) {
   if (!request) return null;
+
+  const api = createApi({ host });
 
   const [name, setName] = useState('Steve');
   const [media, setMedia] = useState(request.media || []);
@@ -52,7 +54,8 @@ function UploadPage({ api, request }) {
 UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   if (!id) return {};
 
-  const api = createApi({ req })
+  const host = hostFromReq(req);
+  const api = createApi({ host });
 
   let request;
   try {
@@ -60,7 +63,7 @@ UploadPage.getInitialProps = async ({ req, query: { id } }) => {
   } catch (error) {
     throw error;
   }
-  return { api, request };
+  return { host, request };
 };
 
 export default UploadPage;

@@ -3,10 +3,12 @@ import copy from 'copy-to-clipboard';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 
-function Home({ api, host }) {
+function Home({ host }) {
   const [name, setName] = useState('Peter');
   const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
+
+  const api = createApi({ host });
 
   const onCopyLink = async () => {
     const request = await api.createRequest({
@@ -49,7 +51,6 @@ function Home({ api, host }) {
 
 Home.getInitialProps = async ({ req }) => {
   return {
-    api: createApi({ req }),
     host: hostFromReq(req),
   };
 };
