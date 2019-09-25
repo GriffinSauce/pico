@@ -1,4 +1,6 @@
 import react, { useState } from 'react';
+import Lightbox from 'react-image-lightbox';
+
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 import Uploader from '~/components/Uploader';
@@ -12,6 +14,9 @@ function UploadPage({ host, request }) {
 
   const [name, setName] = useState('Steve');
   const [media, setMedia] = useState(request.media || []);
+
+  const [viewMediaIndex, setViewMediaIndex] = useState(null);
+  const isLightboxOpen = viewMediaIndex !== null;
 
   const addMedia = async media => {
     // setMedia([...media, ...newMedia]); // Maybe be optimistic?
@@ -36,15 +41,37 @@ function UploadPage({ host, request }) {
       </section>
 
       <div className="media">
-        {media.map(item => (
-          <div className="media-item">
-            <figure
-              key={item.url}
-              style={{ backgroundImage: `url("${item.url}")` }}
-            ></figure>
-          </div>
+        {media.map((item, index) => (
+          <figure
+            className="media-item"
+            key={item.url}
+            onClick={() => {
+              setViewMediaIndex(index);
+            }}
+          >
+            <img src={`${item.url}-/scale_crop/230x230/center/`} />
+          </figure>
         ))}
       </div>
+
+      {isLightboxOpen && (
+        <Lightbox
+          mainSrc={media[viewMediaIndex].url}
+          nextSrc={media[(viewMediaIndex + 1) % media.length].url}
+          prevSrc={
+            media[(viewMediaIndex + media.length - 1) % media.length].url
+          }
+          onCloseRequest={() => setViewMediaIndex(null)}
+          onMovePrevRequest={() =>
+            setViewMediaIndex(
+              (viewMediaIndex + media.length - 1) % media.length,
+            )
+          }
+          onMoveNextRequest={() =>
+            setViewMediaIndex((viewMediaIndex + 1) % media.length)
+          }
+        />
+      )}
 
       <style jsx>{`
         section {
@@ -66,22 +93,8 @@ function UploadPage({ host, request }) {
           box-sizing: border-box;
         }
 
-        .media-item::before {
-          content: '';
-          display: block;
-          padding-top: 100%;
-        }
-
-        .media-item figure {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
+        .media-item img {
           width: 100%;
-          margin: 0;
-          padding: 0;
-          background-position: center;
-          background-size: cover;
         }
       `}</style>
     </>

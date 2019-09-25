@@ -2,6 +2,7 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import * as Sentry from '@sentry/node';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
 Sentry.init({
   dsn: 'https://225c0c41e53e4852a221b260bd070b27@sentry.io/1760702',
@@ -73,9 +74,8 @@ class MyApp extends App {
           .uploadcare--widget {
             width: 100%;
           }
-          .uploadcare--widget__button,
-          .uploadcare--widget__button:hover {
-            display: inline-block;
+          .uploadcare--widget__button_type_open,
+          .uploadcare--widget__button_type_open:hover {
             width: 50%;
             padding: 12px;
             font-size: 22px;
@@ -85,7 +85,7 @@ class MyApp extends App {
             border-radius: 100px;
             cursor: pointer;
           }
-          .uploadcare--widget__button:hover {
+          .uploadcare--widget__button_type_open:hover {
             background-color: #c900ea;
           }
         `}</style>

@@ -25,5 +25,5 @@ module.exports = async (req, res) => {
       error,
     });
   }
-  return res.status(200).json({ media });
+  return res.status(200).json({ media: request.media });
 };
