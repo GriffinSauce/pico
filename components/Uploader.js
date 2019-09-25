@@ -3,7 +3,8 @@ import { Widget } from '@uploadcare/react-widget';
 
 const fileInfoToMedia = fileInfo => ({
   url: fileInfo.cdnUrl,
-  type: 'image',
+  filename: fileInfo.name,
+  type: fileInfo.mimeType,
 });
 
 export default ({ onChange }) => {

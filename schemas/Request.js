@@ -3,23 +3,13 @@ const { Schema } = mongoose;
 
 const Request = new Schema(
   {
-    requester: {
-      name: {
-        type: String,
-        required: true,
-      },
-    },
-    description: {
-      type: String,
-      required: true,
-    },
     media: [
       {
         url: String,
         type: {
           type: String,
-          enum: ['image', 'video'],
         },
+        filename: String,
       },
     ],
   },

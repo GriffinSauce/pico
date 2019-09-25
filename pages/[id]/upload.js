@@ -1,9 +1,11 @@
 import react, { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
-
+import Link from 'next/link';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 import Uploader from '~/components/Uploader';
+import Downloader from '~/components/Downloader';
+import SmallButton from '~/components/SmallButton';
 
 const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
 
@@ -30,15 +32,21 @@ function UploadPage({ host, request }) {
 
   return (
     <>
-      <h1>{request.description}</h1>
+      <h1>Share photos</h1>
 
-      <p>Requested by {request.requester.name}</p>
+      <p>Add some photo's will ya?!</p>
 
       <section>
         {process.browser ? (
           <Uploader requestId={request.slug} onChange={addMedia} />
         ) : null}
       </section>
+
+      <Downloader media={media} />
+
+      <Link href="/">
+        <SmallButton>Make your own request</SmallButton>
+      </Link>
 
       <div className="media">
         {media.map((item, index) => (

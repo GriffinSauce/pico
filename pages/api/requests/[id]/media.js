@@ -1,6 +1,8 @@
 const Request = require('~/schemas/Request');
 
 module.exports = async (req, res) => {
+  if (req.method !== 'POST') return res.status({ status: 404 }).send();
+
   const {
     query: { id },
     body: { media },

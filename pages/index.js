@@ -5,20 +5,13 @@ import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 
 function Home({ host }) {
-  const [name, setName] = useState('Peter');
-  const [description, setDescription] = useState('Boattrip');
   const [copied, setCopied] = useState(false);
   const [link, setLink] = useState();
 
   const api = createApi({ host });
 
   const createAndCopy = async () => {
-    const request = await api.createRequest({
-      requester: {
-        name,
-      },
-      description,
-    });
+    const request = await api.createRequest({});
     // TODO: handle error
     const link = `${host}/${request.id}/upload`;
     copy(link);
