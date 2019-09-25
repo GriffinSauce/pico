@@ -61,6 +61,7 @@ function UploadPage({ host, request }) {
           prevSrc={
             media[(viewMediaIndex + media.length - 1) % media.length].url
           }
+          animationDuration={100}
           onCloseRequest={() => setViewMediaIndex(null)}
           onMovePrevRequest={() =>
             setViewMediaIndex(
