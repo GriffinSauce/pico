@@ -4,7 +4,7 @@ import Head from 'next/head';
 import * as Sentry from '@sentry/node';
 
 Sentry.init({
-  dsn: 'https://00000000000000000000000000000000@sentry.io/1111111',
+  dsn: 'https://225c0c41e53e4852a221b260bd070b27@sentry.io/1760702',
 });
 
 class MyApp extends App {
