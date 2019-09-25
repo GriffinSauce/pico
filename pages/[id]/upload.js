@@ -29,22 +29,59 @@ function UploadPage({ host, request }) {
 
       <p>Requested by {request.requester.name}</p>
 
-      <p>
-        <label htmlFor="name">Name</label>
-        <input id="name" value={name} onChange={e => setName(e.target.value)} />
-      </p>
+      <section>
+        {process.browser ? (
+          <Uploader requestId={request.slug} onChange={addMedia} />
+        ) : null}
+      </section>
 
-      <Uploader requestId={request.slug} onChange={addMedia} />
-
-      <div>
+      <div className="media">
         {media.map(item => (
-          <img src={item.url} />
+          <div className="media-item">
+            <figure
+              key={item.url}
+              style={{ backgroundImage: `url("${item.url}")` }}
+            ></figure>
+          </div>
         ))}
       </div>
 
       <style jsx>{`
-        img {
-          width: 33%;
+        section {
+          margin: 100px 0;
+        }
+
+        .media {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .media-item {
+          position: relative;
+          flex-basis: calc(33.333% - 10px);
+          margin: 5px;
+          background-color: #f0f0f0;
+          border-radius: 6px;
+          overflow: hidden;
+          box-sizing: border-box;
+        }
+
+        .media-item::before {
+          content: '';
+          display: block;
+          padding-top: 100%;
+        }
+
+        .media-item figure {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          background-position: center;
+          background-size: cover;
         }
       `}</style>
     </>

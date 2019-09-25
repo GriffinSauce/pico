@@ -39,6 +39,7 @@ const Request = new Schema(
   },
 );
 
+delete mongoose.connection.models['Request']; // Prevent error "Cannot overwrite model once compiled"
 const Model = mongoose.model('Request', Request);
 
 module.exports = Model;

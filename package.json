@@ -21,6 +21,7 @@
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "axios": "^0.19.0",
     "copy-to-clipboard": "^3.2.0",
+    "framer-motion": "^1.6.7",
     "mongoose": "^5.7.1",
     "netlify-cli": "^2.15.0",
     "next": "^9.0.5",
