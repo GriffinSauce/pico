@@ -1,7 +1,8 @@
 const path = require('path');
 const glob = require('glob');
+const withSourceMaps = require('@zeit/next-source-maps')();
 
-module.exports = {
+module.exports = withSourceMaps({
   webpack: (config, { dev }) => {
     config.module.rules.push({
       test: /\.test.js$/,
@@ -9,4 +10,4 @@ module.exports = {
     });
     return config;
   },
-};
+});

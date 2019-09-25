@@ -15,7 +15,9 @@
     "test-ci": "NODE_ENV=test yarn run test --ci --maxWorkers=4"
   },
   "dependencies": {
+    "@sentry/browser": "^5.6.3",
     "@uploadcare/react-widget": "^1.0.0",
+    "@zeit/next-source-maps": "^0.0.3",
     "axios": "^0.19.0",
     "copy-to-clipboard": "^3.2.0",
     "mongoose": "^5.7.1",
