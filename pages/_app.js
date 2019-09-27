@@ -48,18 +48,10 @@ class MyApp extends App {
             text-align: left;
             font-size: 12px;
           }
-          input {
-            display: block;
-            width: 100%;
-            padding: 4px 0 8px 0;
-            font-size: 24px;
-            border: none;
-            border-bottom: 1px solid #d900fc;
-          }
-          button {
+
+          .button {
             display: inline-block;
-            width: 50%;
-            padding: 12px;
+            padding: 12px 20px;
             font-size: 22px;
             color: #fff;
             background-color: #d900fc;
@@ -67,8 +59,12 @@ class MyApp extends App {
             border-radius: 100px;
             cursor: pointer;
           }
-          button:hover {
+          .button:hover {
             background-color: #c900ea;
+          }
+          .button[disabled] {
+            border: 1px solid #ddd;
+            color: #ddd;
           }
 
           .uploadcare--widget {
@@ -76,8 +72,7 @@ class MyApp extends App {
           }
           .uploadcare--widget__button_type_open,
           .uploadcare--widget__button_type_open:hover {
-            width: 50%;
-            padding: 12px;
+            padding: 12px 20px;
             font-size: 22px;
             color: #fff;
             background-color: #d900fc;

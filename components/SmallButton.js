@@ -7,9 +7,10 @@ export default props => (
         font-weight: 500;
         padding: 6px 12px;
         width: initial;
-        border: 1px solid #d900fc;
-        background-color: transparent;
         color: #d900fc;
+        background-color: transparent;
+        border: 1px solid #d900fc;
+        border-radius: 100px;
       }
       button[disabled] {
         border: 1px solid #ddd;

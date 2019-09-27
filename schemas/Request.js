@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const Request = new Schema(
   {
+    title: {
+      type: String,
+      default: 'My album',
+    },
     media: [
       {
         url: String,

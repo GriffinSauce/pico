@@ -1,57 +1,61 @@
 import react, { useState } from 'react';
+import Router from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
-import copy from 'copy-to-clipboard';
+import Logo from '~/components/Logo';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 
 function Home({ host }) {
-  const [copied, setCopied] = useState(false);
-  const [link, setLink] = useState();
-
   const api = createApi({ host });
 
-  const createAndCopy = async () => {
-    const request = await api.createRequest({});
-    // TODO: handle error
-    const link = `${host}/${request.id}/upload`;
-    copy(link);
-    setLink(link);
-    setCopied(true);
-  };
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
-  const copyLink = () => {
-    copy(link);
+  const createAndGoToAlbum = async () => {
+    setLoading(true);
+    let request;
+    try {
+      request = await api.createRequest();
+    } catch (error) {
+      setError('Something went wrong, please try again');
+      setLoading(false);
+      return;
+    }
+    const link = `/a/${request.id}`;
+    Router.push(link);
   };
 
   return (
     <>
-      <h1>Get photos</h1>
+      <header>
+        <Logo />
+      </header>
 
-      <p>Share the link and get your pics and vids!</p>
+      <p className="valueprop">
+        Share the link and get your photos and videos.
+      </p>
 
-      <section>
-        {copied ? (
-          <button onClick={copyLink}>Copy link again</button>
-        ) : (
-          <button onClick={createAndCopy}>Get your link</button>
-        )}
+      <button
+        className="button"
+        onClick={createAndGoToAlbum}
+        disabled={loading}
+      >
+        {loading ? 'Loading' : 'Create album'}
+      </button>
 
-        <AnimatePresence>
-          {copied && (
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-            >
-              <p>Copied to clipboard!</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </section>
+      {error ? <p className="error">{error}</p> : null}
 
       <style jsx>{`
-        section {
-          margin: 100px 0;
+        header {
+          margin: 50px 0;
+        }
+
+        .valueprop {
+          margin: 0 0 50px 0;
+        }
+
+        .error {
+          margin: 15px 0;
         }
       `}</style>
     </>

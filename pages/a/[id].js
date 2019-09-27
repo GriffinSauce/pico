@@ -1,28 +1,43 @@
 import react, { useState } from 'react';
+import copy from 'copy-to-clipboard';
+import { motion, AnimatePresence } from 'framer-motion';
 import Lightbox from 'react-image-lightbox';
 import Link from 'next/link';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
+import Layout from '~/components/Layout';
+import Logo from '~/components/Logo';
 import Uploader from '~/components/Uploader';
 import Downloader from '~/components/Downloader';
 import SmallButton from '~/components/SmallButton';
-
-const baseFunctionsUrl = `${process.env.URL}/.netlify/functions`;
+import AlbumLink from '~/components/AlbumLink';
 
 function UploadPage({ host, request }) {
   if (!request) return null;
 
   const api = createApi({ host });
 
-  const [name, setName] = useState('Steve');
+  const [title, setTitle] = useState(request.title);
+  const onTitleChange = e => {
+    setTitle(e.target.value);
+  };
+  const onTitleBlur = async () => {
+    if (!title) {
+      setTitle(request.title);
+      return;
+    }
+    const updatedRequest = await api.updateRequest({
+      id: request.id,
+      update: { title },
+    });
+  };
+
   const [media, setMedia] = useState(request.media || []);
 
   const [viewMediaIndex, setViewMediaIndex] = useState(null);
   const isLightboxOpen = viewMediaIndex !== null;
 
   const addMedia = async media => {
-    // setMedia([...media, ...newMedia]); // Maybe be optimistic?
-
     const updatedMedia = await api.addMedia({
       id: request.id,
       media,
@@ -30,23 +45,35 @@ function UploadPage({ host, request }) {
     setMedia(updatedMedia);
   };
 
+  const link = `${host}/a/${request.id}`; // TODO: lib
+
   return (
-    <>
-      <h1>Share photos</h1>
-
-      <p>Add some photo's will ya?!</p>
-
-      <section>
-        {process.browser ? (
-          <Uploader requestId={request.slug} onChange={addMedia} />
-        ) : null}
-      </section>
-
-      <Downloader filename={request.id} media={media} />
-
+    <Layout>
       <Link href="/">
-        <SmallButton>Make your own request</SmallButton>
+        <a>
+          <Logo height={40} />
+        </a>
       </Link>
+
+      <p>
+        Share this link with your friends to let them add pictures and video.
+      </p>
+
+      <AlbumLink>{link}</AlbumLink>
+
+      <input value={title} onChange={onTitleChange} onBlur={onTitleBlur} />
+
+      {process.browser ? (
+        <Uploader requestId={request.slug} onChange={addMedia} />
+      ) : null}
+
+      <div className="actions">
+        <Downloader filename={request.id} media={media} />
+
+        <Link href="/">
+          <SmallButton>make a new album</SmallButton>
+        </Link>
+      </div>
 
       <div className="media">
         {media.map((item, index) => (
@@ -91,12 +118,36 @@ function UploadPage({ host, request }) {
       )}
 
       <style jsx>{`
-        section {
-          margin: 100px 0;
+        p {
+          margin: 30px 0;
+        }
+
+        input {
+          display: inline-block;
+          margin: 100px 0 30px 0;
+          padding: 5px 0;
+          width: ${title.length}ch;
+          min-width: 100px;
+          font-size: 36px;
+          text-align: center;
+          border: none;
+          border-bottom: 2px solid #e2e2e2;
+        }
+        input:focus {
+          outline: none; /* NOTE: retain SOME obvious focus styling for a11y */
+          border-bottom: 2px solid #d900fc;
+        }
+
+        .actions {
+          margin: 30px 0 0 0;
+        }
+        :global(.actions > * + *) {
+          margin-left: 10px;
         }
 
         .media {
           display: flex;
+          margin: 30px 0 0 0;
           flex-wrap: wrap;
         }
 
@@ -124,7 +175,7 @@ function UploadPage({ host, request }) {
           border-radius: 4px;
         }
       `}</style>
-    </>
+    </Layout>
   );
 }
 
