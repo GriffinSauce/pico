@@ -21,6 +21,37 @@ class MyApp extends App {
         <Component {...modifiedPageProps} />
 
         <Head>
+          <title>pico.link - the easiest way to share pictures</title>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/icon/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/icon/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/icon/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/static/icon/site.webmanifest" />
+          <link
+            rel="mask-icon"
+            href="/static/icon/safari-pinned-tab.svg"
+            color="#5bbad5"
+          />
+          <link rel="shortcut icon" href="/static/icon/favicon.ico" />
+          <meta name="msapplication-TileColor" content="#2d89ef" />
+          <meta
+            name="msapplication-config"
+            content="/static/icon/browserconfig.xml"
+          />
+          <meta name="theme-color" content="#ffffff" />
           <link
             href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap"
             rel="stylesheet"
