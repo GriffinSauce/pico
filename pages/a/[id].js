@@ -2,6 +2,7 @@ import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lightbox from 'react-image-lightbox';
+import Head from 'next/head';
 import Link from 'next/link';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
@@ -49,6 +50,10 @@ function UploadPage({ host, request }) {
 
   return (
     <Layout>
+      <Head>
+        <title>pico.link - {title}</title>
+      </Head>
+
       <Link href="/">
         <a>
           <Logo height={40} />
