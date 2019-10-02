@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build-static": "next build && next export --outdir=build",
     "build": "next build",
     "dev": "next",
     "test": "NODE_ENV=test jest",
