@@ -39,7 +39,7 @@ class MyApp extends App {
             sizes="16x16"
             href="/static/icon/favicon-16x16.png"
           />
-          <link rel="manifest" href="/static/icon/site.webmanifest" />
+          <link rel="manifest" href="/static/manifest.json" />
           <link
             rel="mask-icon"
             href="/static/icon/safari-pinned-tab.svg"
@@ -94,8 +94,9 @@ class MyApp extends App {
             background-color: #c900ea;
           }
           .button[disabled] {
-            border: 1px solid #ddd;
-            color: #ddd;
+            color: #fff;
+            background-color: #ccc;
+            border: none;
           }
 
           .uploadcare--widget {

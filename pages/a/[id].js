@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
+import useInternetStatus from '~/lib/useInternetStatus';
 import Layout from '~/components/Layout';
 import Logo from '~/components/Logo';
 import Uploader from '~/components/Uploader';
@@ -15,6 +16,8 @@ import AlbumLink from '~/components/AlbumLink';
 
 function UploadPage({ host, request }) {
   if (!request) return null;
+
+  const { isOnline } = useInternetStatus();
 
   const api = createApi({ host });
 
@@ -66,19 +69,33 @@ function UploadPage({ host, request }) {
 
       <AlbumLink>{link}</AlbumLink>
 
-      <input value={title} onChange={onTitleChange} onBlur={onTitleBlur} />
+      <input
+        value={title}
+        onChange={onTitleChange}
+        onBlur={onTitleBlur}
+        disabled={!isOnline}
+      />
 
-      {process.browser ? (
-        <Uploader requestId={request.slug} onChange={addMedia} />
-      ) : null}
+      {isOnline ? (
+        <>
+          {process.browser ? (
+            <Uploader requestId={request.slug} onChange={addMedia} />
+          ) : null}
 
-      <div className="actions">
-        <Downloader filename={request.id} media={media} />
+          <div className="actions">
+            <Downloader filename={request.id} media={media} />
 
-        <Link href="/">
-          <SmallButton>make a new album</SmallButton>
-        </Link>
-      </div>
+            <Link href="/">
+              <SmallButton>make a new album</SmallButton>
+            </Link>
+          </div>
+        </>
+      ) : (
+        <div className="offline">
+          You're offline, you can add and download pictures when you're
+          connected
+        </div>
+      )}
 
       <div className="media">
         {media.map((item, index) => (
@@ -134,6 +151,7 @@ function UploadPage({ host, request }) {
           width: ${title.length}ch;
           min-width: 100px;
           font-size: 36px;
+          color: 000;
           text-align: center;
           border: none;
           border-bottom: 2px solid #e2e2e2;
@@ -141,6 +159,9 @@ function UploadPage({ host, request }) {
         input:focus {
           outline: none; /* NOTE: retain SOME obvious focus styling for a11y */
           border-bottom: 2px solid #d900fc;
+        }
+        input:disabled {
+          color: #000;
         }
 
         .actions {
@@ -178,6 +199,12 @@ function UploadPage({ host, request }) {
           text-decoration: none;
           border: 1px solid #ddd;
           border-radius: 4px;
+        }
+
+        .offline {
+          margin: 10px auto 0;
+          max-width: 250px;
+          font-size: 12px;
         }
       `}</style>
     </Layout>

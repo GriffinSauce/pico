@@ -4,12 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '~/components/Logo';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
+import useInternetStatus from '~/lib/useInternetStatus';
 
 function Home({ host }) {
   const api = createApi({ host });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const { isOnline } = useInternetStatus();
 
   const createAndGoToAlbum = async () => {
     setLoading(true);
@@ -38,10 +40,15 @@ function Home({ host }) {
       <button
         className="button"
         onClick={createAndGoToAlbum}
-        disabled={loading}
+        disabled={loading || !isOnline}
       >
         {loading ? 'Loading' : 'Create album'}
       </button>
+      {!isOnline ? (
+        <div className="offline">
+          You're offline, try again when you're connected
+        </div>
+      ) : null}
 
       {error ? <p className="error">{error}</p> : null}
 
@@ -56,6 +63,11 @@ function Home({ host }) {
 
         .error {
           margin: 15px 0;
+        }
+
+        .offline {
+          margin: 10px 0 0 0;
+          font-size: 12px;
         }
       `}</style>
     </>
