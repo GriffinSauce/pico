@@ -49,7 +49,7 @@ function UploadPage({ host, request }) {
     setMedia(updatedMedia);
   };
 
-  const link = `${host}/a/${request.id}`; // TODO: lib
+  const link = `${host}${request.uri}`;
 
   return (
     <Layout>
@@ -211,15 +211,15 @@ function UploadPage({ host, request }) {
   );
 }
 
-UploadPage.getInitialProps = async ({ req, query: { id } }) => {
-  if (!id) return {};
+UploadPage.getInitialProps = async ({ req, query: { slug } }) => {
+  if (!slug) return {};
 
   const host = hostFromReq(req);
   const api = createApi({ host });
 
   let request;
   try {
-    request = await api.getRequest({ id });
+    request = await api.getRequestBySlug({ slug });
   } catch (error) {
     throw error;
   }

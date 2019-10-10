@@ -23,8 +23,7 @@ function Home({ host }) {
       setLoading(false);
       return;
     }
-    const link = `/a/${request.id}`;
-    Router.push(link);
+    Router.push(request.uri);
   };
 
   return (
