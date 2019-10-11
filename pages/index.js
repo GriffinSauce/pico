@@ -2,6 +2,8 @@ import react, { useState } from 'react';
 import Router from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '~/components/Logo';
+import Layout from '~/components/Layout';
+
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
 import useInternetStatus from '~/lib/useInternetStatus';
@@ -27,7 +29,7 @@ function Home({ host }) {
   };
 
   return (
-    <>
+    <Layout>
       <header>
         <Logo />
       </header>
@@ -53,7 +55,7 @@ function Home({ host }) {
 
       <style jsx>{`
         header {
-          margin: 50px 0;
+          margin: 20px 0;
         }
 
         .valueprop {
@@ -69,7 +71,7 @@ function Home({ host }) {
           font-size: 12px;
         }
       `}</style>
-    </>
+    </Layout>
   );
 }
 
