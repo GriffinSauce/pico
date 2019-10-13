@@ -1,8 +1,10 @@
-import react, { useState } from 'react';
+import react, { useState, useContext } from 'react';
+import ThemeContext from '~/contexts/ThemeContext';
 import copy from 'copy-to-clipboard';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default ({ children }) => {
+  const { theme } = useContext(ThemeContext);
   const [copied, setCopied] = useState(false);
 
   const copyLink = () => {
@@ -41,17 +43,24 @@ export default ({ children }) => {
           align-items: center;
           width: 100%;
           padding: 12px 18px;
-          background: #f0f0f0;
           font-size: 14px;
-          border: none;
+          background: ${theme.darkMode
+            ? '#2a277c'
+            : '#f0f0f0'}; /* TODO: Use calculation */
+          border: 1px solid ${theme.darkMode ? '#2a277c' : '#f0f0f0'};
           border-radius: 10px;
+          cursor: pointer;
+        }
+        button:focus {
+          outline: none;
+          border: 1px solid ${theme.color.action};
         }
         .link {
           text-align: left;
-          color: #555555;
+          color: ${theme.darkMode ? '#fff' : '#555555'};
         }
         .cta {
-          color: #d900fc;
+          color: ${theme.color.action};
         }
       `}</style>
     </>

@@ -1,7 +1,6 @@
 import react, { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { motion, AnimatePresence } from 'framer-motion';
-import Lightbox from 'react-image-lightbox';
 import Head from 'next/head';
 import Link from 'next/link';
 import createApi from '~/lib/createApi';
@@ -11,13 +10,16 @@ import Layout from '~/components/Layout';
 import Logo from '~/components/Logo';
 import Uploader from '~/components/Uploader';
 import Downloader from '~/components/Downloader';
-import SmallButton from '~/components/SmallButton';
+import ButtonSmall from '~/components/ButtonSmall';
 import AlbumLink from '~/components/AlbumLink';
+import AlbumTitle from '~/components/AlbumTitle';
+import Media from '~/components/Media';
 
 function UploadPage({ host, request }) {
   if (!request) return null;
 
-  const { isOnline } = useInternetStatus();
+  // const { isOnline } = useInternetStatus();
+  const isOnline = true;
 
   const api = createApi({ host });
 
@@ -37,9 +39,6 @@ function UploadPage({ host, request }) {
   };
 
   const [media, setMedia] = useState(request.media || []);
-
-  const [viewMediaIndex, setViewMediaIndex] = useState(null);
-  const isLightboxOpen = viewMediaIndex !== null;
 
   const addMedia = async media => {
     const updatedMedia = await api.addMedia({
@@ -69,7 +68,7 @@ function UploadPage({ host, request }) {
 
       <AlbumLink>{link}</AlbumLink>
 
-      <input
+      <AlbumTitle
         value={title}
         onChange={onTitleChange}
         onBlur={onTitleBlur}
@@ -86,7 +85,7 @@ function UploadPage({ host, request }) {
             <Downloader filename={request.id} media={media} />
 
             <Link href="/">
-              <SmallButton>make a new album</SmallButton>
+              <ButtonSmall>make a new album</ButtonSmall>
             </Link>
           </div>
         </>
@@ -97,71 +96,11 @@ function UploadPage({ host, request }) {
         </div>
       )}
 
-      <div className="media">
-        {media.map((item, index) => (
-          <figure
-            className="media-item"
-            key={item.url}
-            onClick={() => {
-              setViewMediaIndex(index);
-            }}
-          >
-            <img src={`${item.url}-/scale_crop/230x230/center/`} />
-          </figure>
-        ))}
-      </div>
-
-      {isLightboxOpen && (
-        <Lightbox
-          mainSrc={media[viewMediaIndex].url}
-          nextSrc={media[(viewMediaIndex + 1) % media.length].url}
-          prevSrc={
-            media[(viewMediaIndex + media.length - 1) % media.length].url
-          }
-          animationDuration={100}
-          onCloseRequest={() => setViewMediaIndex(null)}
-          onMovePrevRequest={() =>
-            setViewMediaIndex(
-              (viewMediaIndex + media.length - 1) % media.length,
-            )
-          }
-          onMoveNextRequest={() =>
-            setViewMediaIndex((viewMediaIndex + 1) % media.length)
-          }
-          toolbarButtons={[
-            <a
-              className="lightbox-download"
-              href={`${media[viewMediaIndex].url}-/inline/no/`}
-            >
-              download
-            </a>,
-          ]}
-        />
-      )}
+      <Media media={media} />
 
       <style jsx>{`
         p {
           margin: 30px 0;
-        }
-
-        input {
-          display: inline-block;
-          margin: 100px 0 30px 0;
-          padding: 5px 0;
-          width: ${title.length}ch;
-          min-width: 100px;
-          font-size: 36px;
-          color: 000;
-          text-align: center;
-          border: none;
-          border-bottom: 2px solid #e2e2e2;
-        }
-        input:focus {
-          outline: none; /* NOTE: retain SOME obvious focus styling for a11y */
-          border-bottom: 2px solid #d900fc;
-        }
-        input:disabled {
-          color: #000;
         }
 
         .actions {
@@ -169,36 +108,6 @@ function UploadPage({ host, request }) {
         }
         :global(.actions > * + *) {
           margin-left: 10px;
-        }
-
-        .media {
-          display: flex;
-          margin: 30px 0 0 0;
-          flex-wrap: wrap;
-        }
-
-        .media-item {
-          position: relative;
-          flex-basis: calc(33.333% - 10px);
-          margin: 5px;
-          background-color: #f0f0f0;
-          border-radius: 6px;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-
-        .media-item img {
-          width: 100%;
-        }
-
-        .lightbox-download {
-          margin: 0 10px 0 0;
-          padding: 6px 12px 7px 12px;
-          color: #ddd;
-          font-size: 12px;
-          text-decoration: none;
-          border: 1px solid #ddd;
-          border-radius: 4px;
         }
 
         .offline {

@@ -2,7 +2,7 @@ import react, { useState } from 'react';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
-import SmallButton from './SmallButton';
+import ButtonSmall from './ButtonSmall';
 
 /**
  * Fetch the content and return the associated promise.
@@ -58,9 +58,9 @@ export default ({ filename, media }) => {
       {downloading ? (
         <span>{progress}%</span>
       ) : (
-        <SmallButton disabled={!media.length} onClick={doDownload}>
+        <ButtonSmall disabled={!media.length} onClick={doDownload}>
           download all
-        </SmallButton>
+        </ButtonSmall>
       )}
 
       {error ? <div>Error, please try again</div> : null}

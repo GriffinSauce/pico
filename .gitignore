@@ -7,3 +7,4 @@ node_modules
 build
 build-functions
 yarn-error.log
+.DS_Store

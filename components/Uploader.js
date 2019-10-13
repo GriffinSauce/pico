@@ -39,6 +39,24 @@ export default ({ onChange }) => {
           onChange(files.map(fileInfoToMedia));
         }}
       />
+      <style jsx global>{`
+        .uploadcare--widget {
+          width: 100%;
+        }
+        .uploadcare--widget__button_type_open,
+        .uploadcare--widget__button_type_open:hover {
+          padding: 12px 20px;
+          font-size: 22px;
+          color: #fff;
+          background-color: #d900fc;
+          border: none;
+          border-radius: 100px;
+          cursor: pointer;
+        }
+        .uploadcare--widget__button_type_open:hover {
+          background-color: #c900ea;
+        }
+      `}</style>
     </>
   );
 };
