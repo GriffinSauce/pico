@@ -6,20 +6,27 @@ export default ({ children }) => {
   return (
     <>
       <main>
-        <div>{children}</div>
+        <div className="view">{children}</div>
+        <div className="darkMode">
+          <ButtonDarkMode />
+        </div>
       </main>
-
-      <ButtonDarkMode />
 
       <style jsx>{`
         main {
           display: flex;
+          flex-direction: column;
           justify-content: center;
+          align-items: center;
+          height: 100vh;
         }
-        div {
+        .view {
           max-width: 400px;
-          flex-basis: 100%;
+          flex-grow: 1;
           padding: 30px;
+        }
+        .darkMode {
+          margin: 30px 0;
         }
       `}</style>
     </>
