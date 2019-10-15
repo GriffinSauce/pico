@@ -40,18 +40,17 @@ function Home({ host }) {
       </p>
 
       <Button
-        className="btn-create"
         onClick={createAndGoToAlbum}
         disabled={loading || !isOnline}
       >
         {loading ? (
           'Loading'
         ) : (
-          <>
-            <img src="/static/icon-plus.svg" />
-            <span>Create album</span>
-          </>
-        )}
+            <span className="btn-create">
+              <img src="/static/icon-plus.svg" />
+              <span>Create album</span>
+            </span>
+          )}
       </Button>
       {!isOnline ? (
         <div className="offline">
@@ -70,9 +69,12 @@ function Home({ host }) {
           margin: 0 0 50px 0;
         }
 
-        .btn-create :global(svg) {
+        .btn-create * {
           vertical-align: middle;
-          margin-right: 10px;
+        }
+
+        .btn-create img {
+          margin: 0 10px 0 -8px;
         }
 
         .error {

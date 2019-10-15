@@ -3,26 +3,14 @@ import App from 'next/app';
 import Head from 'next/head';
 import ThemeContext from '~/contexts/ThemeContext';
 import * as Sentry from '@sentry/node';
-import getTheme from '~/lib/theme';
+import theme from '~/lib/theme';
 import GlobalStyles from '~/components/GlobalStyles';
 
 Sentry.init({
   dsn: 'https://225c0c41e53e4852a221b260bd070b27@sentry.io/1760702',
 });
 
-const DARK_MODE = true;
-
 class PicoApp extends App {
-  state = {
-    darkMode: true,
-  };
-
-  setDarkMode = darkMode => {
-    this.setState({
-      darkMode,
-    });
-  };
-
   render() {
     const { Component, pageProps } = this.props;
 
@@ -34,9 +22,7 @@ class PicoApp extends App {
       <>
         <ThemeContext.Provider
           value={{
-            darkMode: this.state.darkMode,
-            setDarkMode: this.setDarkMode,
-            theme: getTheme(this.state.darkMode),
+            theme,
           }}
         >
           <Component {...modifiedPageProps} />

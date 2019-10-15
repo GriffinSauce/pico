@@ -41,7 +41,6 @@
   "devDependencies": {
     "babel-plugin-root-import": "^6.4.1",
     "jest": "^24.9.0",
-    "jest-environment-node": "^24.9.0",
-    "mongodb-memory-server": "^5.2.3"
+    "jest-environment-node": "^24.9.0"
   }
 }

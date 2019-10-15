@@ -44,10 +44,8 @@ export default ({ children }) => {
           width: 100%;
           padding: 12px 18px;
           font-size: 14px;
-          background: ${theme.darkMode
-            ? '#2a277c'
-            : '#f0f0f0'}; /* TODO: Use calculation */
-          border: 1px solid ${theme.darkMode ? '#2a277c' : '#f0f0f0'};
+          background: #2a277c; /* TODO: Use calculation */
+          border: 1px solid #2a277c;
           border-radius: 10px;
           cursor: pointer;
         }
@@ -57,7 +55,7 @@ export default ({ children }) => {
         }
         .link {
           text-align: left;
-          color: ${theme.darkMode ? '#fff' : '#555555'};
+          color: #fff;
         }
         .cta {
           color: ${theme.color.action};

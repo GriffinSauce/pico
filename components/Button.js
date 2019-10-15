@@ -9,8 +9,8 @@ export default ({ small, ...props }) => {
       <style jsx>{`
         button {
           display: inline-block;
-          padding: 12px 20px;
-          font-size: 22px;
+          padding: 10px 20px;
+          font-size: 18px;
           color: ${theme.color.actionText};
           background-color: ${theme.color.action};
           border: none;

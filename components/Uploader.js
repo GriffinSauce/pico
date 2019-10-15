@@ -45,8 +45,8 @@ export default ({ onChange }) => {
         }
         .uploadcare--widget__button_type_open,
         .uploadcare--widget__button_type_open:hover {
-          padding: 12px 20px;
-          font-size: 22px;
+          padding: 10px 20px;
+          font-size: 18px;
           color: #fff;
           background-color: #d900fc;
           border: none;
@@ -55,6 +55,16 @@ export default ({ onChange }) => {
         }
         .uploadcare--widget__button_type_open:hover {
           background-color: #c900ea;
+        }
+        .uploadcare--widget__button_type_open:before {
+          display: inline-block;
+          content: "";
+          height: 24px;
+          width: 24px;
+          background-image: url("/static/icon-camera.svg");
+          background-position: center;
+          vertical-align: middle;
+          margin: 0 10px 0 -4px;
         }
       `}</style>
     </>
