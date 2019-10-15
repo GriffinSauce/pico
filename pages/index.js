@@ -39,8 +39,19 @@ function Home({ host }) {
         Share the link and get your photos and videos.
       </p>
 
-      <Button onClick={createAndGoToAlbum} disabled={loading || !isOnline}>
-        {loading ? 'Loading' : 'Create album'}
+      <Button
+        className="btn-create"
+        onClick={createAndGoToAlbum}
+        disabled={loading || !isOnline}
+      >
+        {loading ? (
+          'Loading'
+        ) : (
+          <>
+            <img src="/static/icon-plus.svg" />
+            <span>Create album</span>
+          </>
+        )}
       </Button>
       {!isOnline ? (
         <div className="offline">
@@ -57,6 +68,11 @@ function Home({ host }) {
 
         .valueprop {
           margin: 0 0 50px 0;
+        }
+
+        .btn-create :global(svg) {
+          vertical-align: middle;
+          margin-right: 10px;
         }
 
         .error {
