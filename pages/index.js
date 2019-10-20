@@ -10,6 +10,7 @@ import useInternetStatus from '~/lib/useInternetStatus';
 
 function Home({ host }) {
   const unused = '';
+  const unused2 = '';
   const api = createApi({ host });
 
   const [loading, setLoading] = useState(false);
