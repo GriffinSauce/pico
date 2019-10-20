@@ -2,8 +2,7 @@ import { useState } from 'react';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
-import ButtonSmall from './ButtonSmall';
-import ProgressCircle from './ProgressCircle';
+import DownloaderButton from './DownloaderButton';
 
 /**
  * Fetch the content and return the associated promise.
@@ -56,13 +55,12 @@ const Downloader = ({ filename, media }) => {
 
   return (
     <>
-      {downloading ? (
-        <ProgressCircle stroke={4} radius={20} progress={progress} />
-      ) : (
-        <ButtonSmall disabled={!media.length} onClick={doDownload}>
-          download all
-        </ButtonSmall>
-      )}
+      <DownloaderButton
+        downloading={downloading}
+        disabled={!media.length}
+        progress={progress}
+        onClick={doDownload}
+      />
       {error ? <div>Error, please try again</div> : null}
     </>
   );
