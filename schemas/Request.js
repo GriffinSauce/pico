@@ -1,7 +1,9 @@
 const nanoid = require('nanoid');
 const mongoose = require('~/lib/mongoose');
+
 const { Schema } = mongoose;
 
+const MODEL_NAME = 'Request';
 const Request = new Schema(
   {
     slug: {
@@ -39,11 +41,11 @@ const Request = new Schema(
   },
 );
 
-Request.virtual('uri').get(function() {
+Request.virtual('uri').get(() => {
   return `/a/${this.slug}`;
 });
 
-delete mongoose.connection.models['Request']; // Prevent error "Cannot overwrite model once compiled"
-const Model = mongoose.model('Request', Request);
+delete mongoose.connection.models[MODEL_NAME]; // Prevent error "Cannot overwrite model once compiled"
+const Model = mongoose.model(MODEL_NAME, Request);
 
 module.exports = Model;

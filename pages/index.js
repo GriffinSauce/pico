@@ -1,7 +1,7 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import Router from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '~/components/Logo';
+import Button from '~/components/Button';
 import Layout from '~/components/Layout';
 
 import createApi from '~/lib/createApi';
@@ -20,7 +20,7 @@ function Home({ host }) {
     let request;
     try {
       request = await api.createRequest();
-    } catch (error) {
+    } catch (err) {
       setError('Something went wrong, please try again');
       setLoading(false);
       return;
@@ -38,16 +38,19 @@ function Home({ host }) {
         Share the link and get your photos and videos.
       </p>
 
-      <button
-        className="button"
-        onClick={createAndGoToAlbum}
-        disabled={loading || !isOnline}
-      >
-        {loading ? 'Loading' : 'Create album'}
-      </button>
+      <Button onClick={createAndGoToAlbum} disabled={loading || !isOnline}>
+        {loading ? (
+          'Loading'
+        ) : (
+          <span className="btn-create">
+            <img alt="" src="/icon-plus.svg" />
+            <span>Create album</span>
+          </span>
+        )}
+      </Button>
       {!isOnline ? (
         <div className="offline">
-          You're offline, try again when you're connected
+          You&apos;re offline, try again when you&apos;re connected
         </div>
       ) : null}
 
@@ -60,6 +63,14 @@ function Home({ host }) {
 
         .valueprop {
           margin: 0 0 50px 0;
+        }
+
+        .btn-create * {
+          vertical-align: middle;
+        }
+
+        .btn-create img {
+          margin: 0 10px 0 -8px;
         }
 
         .error {

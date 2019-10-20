@@ -1,8 +1,9 @@
-import react, { useState } from 'react';
+import { useState, useContext } from 'react';
 import copy from 'copy-to-clipboard';
-import { motion, AnimatePresence } from 'framer-motion';
+import ThemeContext from '~/contexts/ThemeContext';
 
 export default ({ children }) => {
+  const { theme } = useContext(ThemeContext);
   const [copied, setCopied] = useState(false);
 
   const copyLink = () => {
@@ -15,24 +16,11 @@ export default ({ children }) => {
 
   return (
     <>
-      <button onClick={copyLink}>
+      <button type="button" onClick={copyLink}>
         <div className="link">
           {children.replace('https://', '').replace('http://', '')}
         </div>
-        <div className="cta">
-          {copied ? 'copied!' : 'copy'}
-          {/* <AnimatePresence>
-          {copied && (
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-            >
-              <p>Copied to clipboard!</p>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-        </div>
+        <div className="cta">{copied ? 'copied!' : 'copy'}</div>
       </button>
       <style jsx>{`
         button {
@@ -41,17 +29,22 @@ export default ({ children }) => {
           align-items: center;
           width: 100%;
           padding: 12px 18px;
-          background: #f0f0f0;
           font-size: 14px;
-          border: none;
+          background: #2a277c; /* TODO: Use calculation */
+          border: 1px solid #2a277c;
           border-radius: 10px;
+          cursor: pointer;
+        }
+        button:focus {
+          outline: none;
+          border: 1px solid ${theme.color.action};
         }
         .link {
           text-align: left;
-          color: #555555;
+          color: #fff;
         }
         .cta {
-          color: #d900fc;
+          color: ${theme.color.action};
         }
       `}</style>
     </>

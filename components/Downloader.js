@@ -1,8 +1,8 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
-import SmallButton from './SmallButton';
+import ButtonSmall from './ButtonSmall';
 
 /**
  * Fetch the content and return the associated promise.
@@ -10,8 +10,8 @@ import SmallButton from './SmallButton';
  * @return {Promise} the promise containing the data.
  */
 function urlToPromise(url) {
-  return new Promise(function(resolve, reject) {
-    JSZipUtils.getBinaryContent(url, function(err, data) {
+  return new Promise((resolve, reject) => {
+    JSZipUtils.getBinaryContent(url, (err, data) => {
       if (err) {
         reject(err);
       } else {
@@ -31,7 +31,7 @@ export default ({ filename, media }) => {
 
     const zip = new JSZip();
 
-    media.forEach((mediaItem, index) => {
+    media.forEach(mediaItem => {
       zip.file(mediaItem.filename, urlToPromise(mediaItem.url), {
         binary: true,
       });
@@ -40,7 +40,7 @@ export default ({ filename, media }) => {
     // when everything has been downloaded, we can trigger the download
     zip
       .generateAsync({ type: 'blob' }, function updateCallback(metadata) {
-        setProgress(metadata.percent | 0);
+        setProgress(metadata.percent || 0);
       })
       .then(
         blob => {
@@ -58,9 +58,9 @@ export default ({ filename, media }) => {
       {downloading ? (
         <span>{progress}%</span>
       ) : (
-        <SmallButton disabled={!media.length} onClick={doDownload}>
+        <ButtonSmall disabled={!media.length} onClick={doDownload}>
           download all
-        </SmallButton>
+        </ButtonSmall>
       )}
 
       {error ? <div>Error, please try again</div> : null}

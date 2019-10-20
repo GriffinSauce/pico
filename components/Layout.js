@@ -1,18 +1,24 @@
-export default ({ children }) => (
-  <>
-    <main>
-      <div>{children}</div>
-    </main>
-    <style jsx>{`
-      main {
-        display: flex;
-        justify-content: center;
-      }
-      div {
-        max-width: 400px;
-        flex-basis: 100%;
-        padding: 30px;
-      }
-    `}</style>
-  </>
-);
+export default ({ children }) => {
+  return (
+    <>
+      <main>
+        <div className="view">{children}</div>
+      </main>
+
+      <style jsx>{`
+        main {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .view {
+          max-width: 400px;
+          flex-grow: 1;
+          padding: 30px;
+        }
+      `}</style>
+    </>
+  );
+};

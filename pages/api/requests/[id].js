@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     try {
       request = await Request.findById(id);
     } catch (error) {
-      console.error('Error finding request', error);
+      console.error('Error finding request', error); // eslint-disable-line no-console
       return res.status(500).send({
         error,
       });

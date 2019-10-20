@@ -1,0 +1,68 @@
+{
+  "plugins": ["react", "prettier"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-plugin-root-import": {},
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  // AND CUSTOMIZE!
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js"]
+      }
+    ],
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    /**
+     * NextJS <Link> API conflicts with a11y expectations
+     * https://github.com/zeit/next.js/issues/5533
+     * https://github.com/evcohen/eslint-plugin-jsx-a11y/issues/402
+     **/
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ]
+  },
+  "globals": {
+    "React": "writable"
+  }
+}

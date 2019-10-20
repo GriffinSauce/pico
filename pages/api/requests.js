@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   try {
     await request.save();
   } catch (error) {
-    console.error('Error creating request', error);
+    console.error('Error creating request', error); // eslint-disable-line no-console
     return res.status(500).send({
       error,
     });
