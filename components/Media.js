@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import MediaGrid from '~/components/MediaGrid';
 
@@ -29,6 +29,7 @@ export default ({ media }) => {
           }
           toolbarButtons={[
             <a
+              key="download-btn"
               className="lightbox-download"
               href={`${media[viewMediaIndex].url}-/inline/no/`}
             >
@@ -38,7 +39,7 @@ export default ({ media }) => {
         />
       )}
 
-      <style>{`
+      <style jsx>{`
         .lightbox-download {
           margin: 0 10px 0 0;
           padding: 6px 12px 7px 12px;

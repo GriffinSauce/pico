@@ -1,9 +1,8 @@
-const path = require('path');
-const glob = require('glob');
 const withCSS = require('@zeit/next-css');
 const withSourceMaps = require('@zeit/next-source-maps')();
 const withOffline = require('next-offline');
 
+/* eslint-disable no-param-reassign */
 module.exports = withOffline(
   withSourceMaps(
     withCSS({

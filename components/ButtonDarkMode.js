@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import SVG from 'react-inlinesvg';
-import css from 'styled-jsx/css';
 import ThemeContext from '~/contexts/ThemeContext';
 
-export default props => {
+export default () => {
   const { theme, darkMode, setDarkMode } = useContext(ThemeContext);
 
+  /* eslint-disable react/button-has-type */
   return (
     <>
-      <button onClick={() => setDarkMode(!darkMode)}>
+      <button type="button" onClick={() => setDarkMode(!darkMode)}>
         <SVG src="/static/icon-darkmode.svg" />
       </button>
       <style jsx>{`

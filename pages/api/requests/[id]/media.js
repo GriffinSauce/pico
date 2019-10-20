@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
       },
     );
   } catch (error) {
-    console.error('Error creating request', error);
+    console.error('Error creating request', error); // eslint-disable-line no-console
     return res.status(500).send({
       error,
     });

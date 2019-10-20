@@ -36,7 +36,7 @@ MyError.getInitialProps = async ({ res, err, asPath }) => {
 
       return errorInitialProps;
     }
-  } else {
+  } else if (err) {
     // Running on the client (browser).
     //
     // Next.js will provide an err if:
@@ -46,11 +46,9 @@ MyError.getInitialProps = async ({ res, err, asPath }) => {
     //    componentDidMount, etc) that was caught by Next.js's React Error
     //    Boundary. Read more about what types of exceptions are caught by Error
     //    Boundaries: https://reactjs.org/docs/error-boundaries.html
-    if (err) {
-      Sentry.captureException(err);
+    Sentry.captureException(err);
 
-      return errorInitialProps;
-    }
+    return errorInitialProps;
   }
 
   // If this point is reached, getInitialProps was called without any

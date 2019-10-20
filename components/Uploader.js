@@ -1,4 +1,3 @@
-import react, { useEffect, useRef } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 
 if (process.browser) {
@@ -58,10 +57,10 @@ export default ({ onChange }) => {
         }
         .uploadcare--widget__button_type_open:before {
           display: inline-block;
-          content: "";
+          content: '';
           height: 24px;
           width: 24px;
-          background-image: url("/static/icon-camera.svg");
+          background-image: url('/static/icon-camera.svg');
           background-position: center;
           vertical-align: middle;
           margin: 0 10px 0 -4px;

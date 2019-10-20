@@ -1,6 +1,5 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import Router from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '~/components/Logo';
 import Button from '~/components/Button';
 import Layout from '~/components/Layout';
@@ -21,7 +20,7 @@ function Home({ host }) {
     let request;
     try {
       request = await api.createRequest();
-    } catch (error) {
+    } catch (err) {
       setError('Something went wrong, please try again');
       setLoading(false);
       return;
@@ -39,22 +38,19 @@ function Home({ host }) {
         Share the link and get your photos and videos.
       </p>
 
-      <Button
-        onClick={createAndGoToAlbum}
-        disabled={loading || !isOnline}
-      >
+      <Button onClick={createAndGoToAlbum} disabled={loading || !isOnline}>
         {loading ? (
           'Loading'
         ) : (
-            <span className="btn-create">
-              <img src="/static/icon-plus.svg" />
-              <span>Create album</span>
-            </span>
-          )}
+          <span className="btn-create">
+            <img alt="" src="/static/icon-plus.svg" />
+            <span>Create album</span>
+          </span>
+        )}
       </Button>
       {!isOnline ? (
         <div className="offline">
-          You're offline, try again when you're connected
+          You&apos;re offline, try again when you&apos;re connected
         </div>
       ) : null}
 

@@ -1,11 +1,8 @@
-import react, { useState } from 'react';
-import copy from 'copy-to-clipboard';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import createApi from '~/lib/createApi';
 import hostFromReq from '~/lib/hostFromReq';
-import useInternetStatus from '~/lib/useInternetStatus';
 import Layout from '~/components/Layout';
 import Logo from '~/components/Logo';
 import Uploader from '~/components/Uploader';
@@ -32,7 +29,7 @@ function UploadPage({ host, request }) {
       setTitle(request.title);
       return;
     }
-    const updatedRequest = await api.updateRequest({
+    await api.updateRequest({
       id: request.id,
       update: { title },
     });
@@ -40,10 +37,10 @@ function UploadPage({ host, request }) {
 
   const [media, setMedia] = useState(request.media || []);
 
-  const addMedia = async media => {
+  const addMedia = async newMedia => {
     const updatedMedia = await api.addMedia({
       id: request.id,
-      media,
+      media: newMedia,
     });
     setMedia(updatedMedia);
   };
@@ -91,8 +88,8 @@ function UploadPage({ host, request }) {
         </>
       ) : (
         <div className="offline">
-          You're offline, you can add and download pictures when you're
-          connected
+          You&apos;re offline, you can add and download pictures when
+          you&apos;re connected
         </div>
       )}
 
@@ -126,12 +123,7 @@ UploadPage.getInitialProps = async ({ req, query: { slug } }) => {
   const host = hostFromReq(req);
   const api = createApi({ host });
 
-  let request;
-  try {
-    request = await api.getRequestBySlug({ slug });
-  } catch (error) {
-    throw error;
-  }
+  const request = await api.getRequestBySlug({ slug });
   return { host, request };
 };
 

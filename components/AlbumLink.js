@@ -1,7 +1,6 @@
-import react, { useState, useContext } from 'react';
-import ThemeContext from '~/contexts/ThemeContext';
+import { useState, useContext } from 'react';
 import copy from 'copy-to-clipboard';
-import { motion, AnimatePresence } from 'framer-motion';
+import ThemeContext from '~/contexts/ThemeContext';
 
 export default ({ children }) => {
   const { theme } = useContext(ThemeContext);
@@ -17,24 +16,11 @@ export default ({ children }) => {
 
   return (
     <>
-      <button onClick={copyLink}>
+      <button type="button" onClick={copyLink}>
         <div className="link">
           {children.replace('https://', '').replace('http://', '')}
         </div>
-        <div className="cta">
-          {copied ? 'copied!' : 'copy'}
-          {/* <AnimatePresence>
-          {copied && (
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-            >
-              <p>Copied to clipboard!</p>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
-        </div>
+        <div className="cta">{copied ? 'copied!' : 'copy'}</div>
       </button>
       <style jsx>{`
         button {

@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import ThemeContext from '~/contexts/ThemeContext';
 
 export default props => {
   const { theme } = useContext(ThemeContext);
+  const { value } = props;
 
   return (
     <>
@@ -12,7 +13,7 @@ export default props => {
           display: inline-block;
           margin: 100px 0 30px 0;
           padding: 5px 0;
-          width: ${props.value.length}ch;
+          width: ${value.length}ch;
           min-width: 100px;
           font-size: 36px;
           color: ${theme.color.textPrimary};

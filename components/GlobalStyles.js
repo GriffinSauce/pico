@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Head from 'next/head';
 import ThemeContext from '~/contexts/ThemeContext';
 

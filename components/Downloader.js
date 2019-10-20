@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
@@ -10,8 +10,8 @@ import ButtonSmall from './ButtonSmall';
  * @return {Promise} the promise containing the data.
  */
 function urlToPromise(url) {
-  return new Promise(function(resolve, reject) {
-    JSZipUtils.getBinaryContent(url, function(err, data) {
+  return new Promise((resolve, reject) => {
+    JSZipUtils.getBinaryContent(url, (err, data) => {
       if (err) {
         reject(err);
       } else {
@@ -31,7 +31,7 @@ export default ({ filename, media }) => {
 
     const zip = new JSZip();
 
-    media.forEach((mediaItem, index) => {
+    media.forEach(mediaItem => {
       zip.file(mediaItem.filename, urlToPromise(mediaItem.url), {
         binary: true,
       });
@@ -40,7 +40,7 @@ export default ({ filename, media }) => {
     // when everything has been downloaded, we can trigger the download
     zip
       .generateAsync({ type: 'blob' }, function updateCallback(metadata) {
-        setProgress(metadata.percent | 0);
+        setProgress(metadata.percent || 0);
       })
       .then(
         blob => {
