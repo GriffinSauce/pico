@@ -2,6 +2,10 @@
 
 The easiest way to share pictures.
 
-Contribution: TBD.
+## Contributing
 
-License: TBD.
+Please see CONTRIBUTING.md.
+
+## License: MIT
+
+Please see LICENSE.md.
