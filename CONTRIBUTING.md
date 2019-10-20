@@ -13,13 +13,17 @@ The following is a set of guidelines for contributing to pico.link. These are mo
 
 ### Suggesting Enhancements
 
-- Open an issue and clearly describe the desired change. If you are able to, create a [pull-request](#pull-requests)!
+- Open an issue and clearly describe the desired change. If you are able to, [develop](contributing-code) it!
 
-### Helping out with development
+### Contributing code
 
-:arrow_down:
+To contribute code:
 
-## Development
+- Develop your fix/feature
+- Make a pull request
+- Adhere to the styleguides
+
+#### Running a local version
 
 1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device.
 2. Install yarn: `npm install -g yarn`
@@ -27,7 +31,7 @@ The following is a set of guidelines for contributing to pico.link. These are mo
 4. Run `yarn dev` to build and watch for code changes
 5. View your local version of pico.link at http://localhost:3000
 
-## Pull Requests
+#### Pull Requests
 
 Please follow these steps:
 
