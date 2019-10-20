@@ -63,7 +63,6 @@ const Downloader = ({ filename, media }) => {
           download all
         </ButtonSmall>
       )}
-
       {error ? <div>Error, please try again</div> : null}
     </>
   );

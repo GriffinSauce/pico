@@ -1,4 +1,6 @@
-export default ({ progress, radius, stroke }) => {
+import { motion } from 'framer-motion';
+
+const ProgressCircle = ({ progress, color = '#fff', radius, stroke }) => {
   // const normalizedRadius = radius - stroke * 2;
   const normalizedRadius = radius - stroke;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -6,16 +8,20 @@ export default ({ progress, radius, stroke }) => {
 
   return (
     <svg height={radius * 2} width={radius * 2}>
-      <circle
-        stroke="white"
+      <motion.circle
+        stroke={color}
         fill="transparent"
         strokeWidth={stroke}
+        strokeLinecap="round"
         strokeDasharray={`${circumference} ${circumference}`}
-        style={{ strokeDashoffset }}
         r={normalizedRadius}
         cx={radius}
         cy={radius}
+        initial={{ strokeDashoffset }}
+        animate={{ strokeDashoffset }}
       />
     </svg>
   );
 };
+
+export default ProgressCircle;
