@@ -35,7 +35,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-image-lightbox": "^5.1.0",
-    "react-inlinesvg": "^1.1.7"
+    "react-inlinesvg": "^1.1.7",
+    "react-input-autosize": "^2.2.2"
   },
   "devDependencies": {
     "babel-plugin-root-import": "^6.4.1",

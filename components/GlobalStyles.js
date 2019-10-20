@@ -32,6 +32,16 @@ export default () => {
         h6 {
           font-family: ${theme.font.header};
         }
+        h1,
+        .h1 {
+          font-size: 36px;
+          font-weight: 400;
+        }
+        h2,
+        .h2 {
+          font-size: 24px;
+          font-weight: 400;
+        }
         label {
           display: block;
           text-align: left;

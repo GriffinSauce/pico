@@ -34,9 +34,11 @@ function Home({ host }) {
         <Logo />
       </header>
 
-      <p className="valueprop">
-        Share the link and get your photos and videos.
-      </p>
+      <h1 className="h2 valueprop">
+        The easiest way to share photos
+        <br />
+        of your cat!
+      </h1>
 
       <Button onClick={createAndGoToAlbum} disabled={loading || !isOnline}>
         {loading ? (
@@ -58,7 +60,7 @@ function Home({ host }) {
 
       <style jsx>{`
         header {
-          margin: 20px 0;
+          margin: 50px 0;
         }
 
         .valueprop {

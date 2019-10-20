@@ -14,6 +14,7 @@ export default ({ children }) => {
           height: 100vh;
         }
         .view {
+          width: 100%;
           max-width: 400px;
           flex-grow: 1;
           padding: 30px;

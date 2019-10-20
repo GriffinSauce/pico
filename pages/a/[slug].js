@@ -97,7 +97,8 @@ function UploadPage({ host, request }) {
 
       <style jsx>{`
         p {
-          margin: 30px 0;
+          margin: 30px auto;
+          width: 280px;
         }
 
         .actions {
