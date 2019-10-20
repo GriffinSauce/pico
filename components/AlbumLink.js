@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import copy from 'copy-to-clipboard';
 import ThemeContext from '~/contexts/ThemeContext';
 
-export default ({ children }) => {
+const AlbumLink = ({ children }) => {
   const { theme } = useContext(ThemeContext);
   const [copied, setCopied] = useState(false);
 
@@ -50,3 +50,5 @@ export default ({ children }) => {
     </>
   );
 };
+
+export default AlbumLink;

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import ThemeContext from '~/contexts/ThemeContext';
 
-export default props => {
+const AlbumTitle = props => {
   const { theme } = useContext(ThemeContext);
   const { value } = props;
 
@@ -40,3 +40,5 @@ export default props => {
     </>
   );
 };
+
+export default AlbumTitle;

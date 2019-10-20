@@ -22,7 +22,7 @@ function urlToPromise(url) {
   });
 }
 
-export default ({ filename, media }) => {
+const Downloader = ({ filename, media }) => {
   const [downloading, setDownloading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState();
@@ -68,3 +68,5 @@ export default ({ filename, media }) => {
     </>
   );
 };
+
+export default Downloader;
