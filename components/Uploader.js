@@ -60,7 +60,7 @@ export default ({ onChange }) => {
           content: '';
           height: 24px;
           width: 24px;
-          background-image: url('/static/icon-camera.svg');
+          background-image: url('/icon-camera.svg');
           background-position: center;
           vertical-align: middle;
           margin: 0 10px 0 -4px;

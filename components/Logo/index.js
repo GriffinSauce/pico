@@ -1,6 +1,6 @@
 export default ({ height = 50 }) => (
   <>
-    <img alt="" src="/static/logo.svg" />
+    <img alt="" src="/logo.svg" />
     <style jsx>{`
       img {
         height: ${height}px;

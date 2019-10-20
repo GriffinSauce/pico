@@ -43,7 +43,7 @@ function Home({ host }) {
           'Loading'
         ) : (
           <span className="btn-create">
-            <img alt="" src="/static/icon-plus.svg" />
+            <img alt="" src="/icon-plus.svg" />
             <span>Create album</span>
           </span>
         )}

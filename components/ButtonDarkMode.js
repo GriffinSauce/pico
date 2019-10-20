@@ -9,7 +9,7 @@ export default () => {
   return (
     <>
       <button type="button" onClick={() => setDarkMode(!darkMode)}>
-        <SVG src="/static/icon-darkmode.svg" />
+        <SVG src="/icon-darkmode.svg" />
       </button>
       <style jsx>{`
         button {
