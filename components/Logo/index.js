@@ -1,4 +1,4 @@
-export default ({ height = 50 }) => (
+const Logo = ({ height = 50 }) => (
   <>
     <img alt="" src="/logo.svg" />
     <style jsx>{`
@@ -8,3 +8,5 @@ export default ({ height = 50 }) => (
     `}</style>
   </>
 );
+
+export default Logo;

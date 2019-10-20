@@ -1,4 +1,4 @@
-export default ({ media, onClickItem }) => {
+const MediaGrid = ({ media, onClickItem }) => {
   return (
     <>
       <section className="media">
@@ -52,3 +52,5 @@ export default ({ media, onClickItem }) => {
     </>
   );
 };
+
+export default MediaGrid;

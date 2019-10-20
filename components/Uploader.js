@@ -25,7 +25,7 @@ const fileInfoToMedia = fileInfo => ({
   type: fileInfo.mimeType,
 });
 
-export default ({ onChange }) => {
+const Uploader = ({ onChange }) => {
   return (
     <>
       <Widget
@@ -69,3 +69,5 @@ export default ({ onChange }) => {
     </>
   );
 };
+
+export default Uploader;

@@ -4,7 +4,7 @@ import ThemeContext from '~/contexts/ThemeContext';
 
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
-export default () => {
+const GlobalStyles = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <>
@@ -51,3 +51,5 @@ export default () => {
     </>
   );
 };
+
+export default GlobalStyles;

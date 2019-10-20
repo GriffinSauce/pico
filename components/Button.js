@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import ThemeContext from '~/contexts/ThemeContext';
 
-export default props => {
+const Button = props => {
   const { theme } = useContext(ThemeContext);
   /* eslint-disable react/button-has-type */
   return (
@@ -30,3 +30,5 @@ export default props => {
     </>
   );
 };
+
+export default Button;

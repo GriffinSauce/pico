@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
 import MediaGrid from '~/components/MediaGrid';
 
-export default ({ media }) => {
+const Media = ({ media }) => {
   const [viewMediaIndex, setViewMediaIndex] = useState(null);
   const isLightboxOpen = viewMediaIndex !== null;
 
@@ -53,3 +53,5 @@ export default ({ media }) => {
     </>
   );
 };
+
+export default Media;

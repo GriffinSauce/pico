@@ -1,4 +1,4 @@
-export default ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <main>
@@ -23,3 +23,5 @@ export default ({ children }) => {
     </>
   );
 };
+
+export default Layout;
