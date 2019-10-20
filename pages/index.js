@@ -9,6 +9,7 @@ import hostFromReq from '~/lib/hostFromReq';
 import useInternetStatus from '~/lib/useInternetStatus';
 
 function Home({ host }) {
+  const unused = '';
   const api = createApi({ host });
 
   const [loading, setLoading] = useState(false);
