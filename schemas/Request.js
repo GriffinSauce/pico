@@ -41,7 +41,7 @@ const Request = new Schema(
   },
 );
 
-Request.virtual('uri').get(() => {
+Request.virtual('uri').get(function generateSlug() {
   return `/a/${this.slug}`;
 });
 
