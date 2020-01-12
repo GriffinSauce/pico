@@ -5,6 +5,9 @@
   "author": "Joris Griffioen",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next",
