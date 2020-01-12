@@ -42,6 +42,11 @@ const GlobalStyles = () => {
           font-size: 24px;
           font-weight: 400;
         }
+        h3,
+        .h3 {
+          font-size: 20px;
+          font-weight: 400;
+        }
         label {
           display: block;
           text-align: left;
