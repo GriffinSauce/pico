@@ -21,7 +21,7 @@ function UploadPage({ host, request }) {
   const api = createApi({ host });
 
   const [title, setTitle] = useState(request.title);
-  const onTitleChange = e => {
+  const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
   const onTitleBlur = async () => {
@@ -37,7 +37,7 @@ function UploadPage({ host, request }) {
 
   const [media, setMedia] = useState(request.media || []);
 
-  const addMedia = async newMedia => {
+  const addMedia = async (newMedia) => {
     const updatedMedia = await api.addMedia({
       id: request.id,
       media: newMedia,

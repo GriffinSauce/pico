@@ -31,7 +31,7 @@ const Downloader = ({ filename, media }) => {
 
     const zip = new JSZip();
 
-    media.forEach(mediaItem => {
+    media.forEach((mediaItem) => {
       zip.file(mediaItem.filename, urlToPromise(mediaItem.url), {
         binary: true,
       });
@@ -43,11 +43,11 @@ const Downloader = ({ filename, media }) => {
         setProgress(metadata.percent || 0);
       })
       .then(
-        blob => {
+        (blob) => {
           saveAs(blob, `${filename}.zip`); // see FileSaver.js
           setDownloading(false);
         },
-        err => {
+        (err) => {
           setError(err);
         },
       );

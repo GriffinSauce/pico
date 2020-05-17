@@ -19,7 +19,7 @@ if (process.browser) {
   };
 }
 
-const fileInfoToMedia = fileInfo => ({
+const fileInfoToMedia = (fileInfo) => ({
   url: fileInfo.cdnUrl,
   filename: fileInfo.name,
   type: fileInfo.mimeType,
@@ -33,7 +33,7 @@ const Uploader = ({ onChange }) => {
         multiple
         systemDialog
         imagesOnly
-        onFileSelect={async filesInfo => {
+        onFileSelect={async (filesInfo) => {
           const files = await Promise.all(filesInfo.files());
           onChange(files.map(fileInfoToMedia));
         }}

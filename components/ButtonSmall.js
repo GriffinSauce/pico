@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import ThemeContext from '~/contexts/ThemeContext';
 
-const ButtonSmall = props => {
+const ButtonSmall = (props) => {
   const { theme } = useContext(ThemeContext);
 
   /* eslint-disable react/button-has-type */

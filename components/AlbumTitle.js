@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AutosizeInput from 'react-input-autosize';
 import ThemeContext from '~/contexts/ThemeContext';
 
-const AlbumTitle = props => {
+const AlbumTitle = (props) => {
   const { theme } = useContext(ThemeContext);
   const { value } = props;
 
