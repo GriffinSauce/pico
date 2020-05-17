@@ -58,7 +58,7 @@ class PicoApp extends App {
               name="msapplication-config"
               content="/icon/browserconfig.xml"
             />
-            <meta name="theme-color" content="#ffffff" />
+            <meta name="theme-color" content="#020021" />
           </Head>
 
           <GlobalStyles />
