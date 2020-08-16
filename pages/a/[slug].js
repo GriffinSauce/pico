@@ -11,12 +11,12 @@ import ButtonSmall from '~/components/ButtonSmall';
 import AlbumLink from '~/components/AlbumLink';
 import AlbumTitle from '~/components/AlbumTitle';
 import Media from '~/components/Media';
+import useInternetStatus from '~/lib/useInternetStatus';
 
 function UploadPage({ host, request }) {
   if (!request) return null;
 
-  // const { isOnline } = useInternetStatus();
-  const isOnline = true;
+  const { isOnline } = useInternetStatus();
 
   const api = createApi({ host });
 
@@ -53,14 +53,18 @@ function UploadPage({ host, request }) {
         <title>pico.link - {title}</title>
       </Head>
 
-      <Link href="/">
-        <a>
-          <Logo height={40} />
-        </a>
-      </Link>
+      <header className="flex justify-center">
+        <Link href="/">
+          <a>
+            <Logo height={40} />
+          </a>
+        </Link>
+      </header>
 
-      <p>
-        Share this link with your friends to let them add pictures and video.
+      <p className="my-6">
+        Share this link with your friends
+        <br />
+        to let them add pictures and video.
       </p>
 
       <AlbumLink>{link}</AlbumLink>
@@ -78,8 +82,10 @@ function UploadPage({ host, request }) {
             <Uploader requestId={request.slug} onChange={addMedia} />
           ) : null}
 
-          <div className="actions">
+          <div className="flex justify-center mt-6">
             <Downloader filename={request.id} media={media} />
+
+            <div className="w-3" />
 
             <Link href="/">
               <ButtonSmall>make a new album</ButtonSmall>
@@ -87,33 +93,13 @@ function UploadPage({ host, request }) {
           </div>
         </>
       ) : (
-        <div className="offline">
+        <div className="mt-3 text-sm">
           You&apos;re offline, you can add and download pictures when
           you&apos;re connected
         </div>
       )}
 
       <Media media={media} />
-
-      <style jsx>{`
-        p {
-          margin: 30px auto;
-          width: 280px;
-        }
-
-        .actions {
-          margin: 30px 0 0 0;
-        }
-        :global(.actions > * + *) {
-          margin-left: 10px;
-        }
-
-        .offline {
-          margin: 10px auto 0;
-          max-width: 250px;
-          font-size: 12px;
-        }
-      `}</style>
     </Layout>
   );
 }
