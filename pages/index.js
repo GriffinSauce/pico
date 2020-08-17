@@ -43,8 +43,8 @@ function Home({ host }) {
         {loading ? (
           'Loading'
         ) : (
-          <span className="flex items-center justify-center">
-            <GoPlus className="mr-3 -ml-1" />
+          <span className="flex items-center justify-center space-x-3">
+            <GoPlus className="-ml-1" />
             <span>Create album</span>
           </span>
         )}

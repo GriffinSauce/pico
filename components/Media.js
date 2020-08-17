@@ -30,7 +30,7 @@ const Media = ({ media }) => {
           toolbarButtons={[
             <a
               key="download-btn"
-              className="lightbox-download"
+              className="px-3 py-2 mr-3 text-sm leading-none text-gray-300 border border-gray-300 rounded hover:border-white hover:text-white"
               href={`${media[viewMediaIndex].url}-/inline/no/`}
             >
               download
@@ -38,18 +38,6 @@ const Media = ({ media }) => {
           ]}
         />
       )}
-
-      <style jsx>{`
-        .lightbox-download {
-          margin: 0 10px 0 0;
-          padding: 6px 12px 7px 12px;
-          color: #ddd;
-          font-size: 12px;
-          text-decoration: none;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-        }
-      `}</style>
     </>
   );
 };

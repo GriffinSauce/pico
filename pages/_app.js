@@ -2,8 +2,6 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import * as Sentry from '@sentry/node';
-import ThemeContext from '~/contexts/ThemeContext';
-import theme from '~/lib/theme';
 import GlobalStyles from '~/components/GlobalStyles';
 
 Sentry.init({
@@ -20,49 +18,40 @@ class PicoApp extends App {
 
     return (
       <>
-        <ThemeContext.Provider
-          value={{
-            theme,
-          }}
-        >
-          <Component {...modifiedPageProps} />
+        <Head>
+          <title>pico.link - the easiest way to share pictures</title>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icon/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/icon/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/icon/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="mask-icon"
+            href="/icon/safari-pinned-tab.svg"
+            color="#5bbad5"
+          />
+          <link rel="shortcut icon" href="/icon/favicon.ico" />
+          <meta name="msapplication-TileColor" content="#2d89ef" />
+          <meta name="msapplication-config" content="/icon/browserconfig.xml" />
+          <meta name="theme-color" content="#020021" />
+        </Head>
 
-          <Head>
-            <title>pico.link - the easiest way to share pictures</title>
-            <link
-              rel="apple-touch-icon"
-              sizes="180x180"
-              href="/icon/apple-touch-icon.png"
-            />
-            <link
-              rel="icon"
-              type="image/png"
-              sizes="32x32"
-              href="/icon/favicon-32x32.png"
-            />
-            <link
-              rel="icon"
-              type="image/png"
-              sizes="16x16"
-              href="/icon/favicon-16x16.png"
-            />
-            <link rel="manifest" href="/manifest.json" />
-            <link
-              rel="mask-icon"
-              href="/icon/safari-pinned-tab.svg"
-              color="#5bbad5"
-            />
-            <link rel="shortcut icon" href="/icon/favicon.ico" />
-            <meta name="msapplication-TileColor" content="#2d89ef" />
-            <meta
-              name="msapplication-config"
-              content="/icon/browserconfig.xml"
-            />
-            <meta name="theme-color" content="#020021" />
-          </Head>
+        <GlobalStyles />
 
-          <GlobalStyles />
-        </ThemeContext.Provider>
+        <Component {...modifiedPageProps} />
       </>
     );
   }

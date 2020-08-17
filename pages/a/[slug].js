@@ -53,7 +53,7 @@ function UploadPage({ host, request }) {
         <title>pico.link - {title}</title>
       </Head>
 
-      <header className="flex justify-center">
+      <header className="flex justify-center py-3">
         <Link href="/">
           <a>
             <Logo height={40} />
@@ -61,7 +61,7 @@ function UploadPage({ host, request }) {
         </Link>
       </header>
 
-      <p className="my-6">
+      <p className="pt-6 mb-8 text-lg">
         Share this link with your friends
         <br />
         to let them add pictures and video.
@@ -69,12 +69,14 @@ function UploadPage({ host, request }) {
 
       <AlbumLink>{link}</AlbumLink>
 
-      <AlbumTitle
-        value={title}
-        onChange={onTitleChange}
-        onBlur={onTitleBlur}
-        disabled={!isOnline}
-      />
+      <div className="mt-24 mb-8">
+        <AlbumTitle
+          value={title}
+          onChange={onTitleChange}
+          onBlur={onTitleBlur}
+          disabled={!isOnline}
+        />
+      </div>
 
       {isOnline ? (
         <>
