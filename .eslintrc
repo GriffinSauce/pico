@@ -19,12 +19,6 @@
     "jest": true
   },
   "settings": {
-    "import/resolver": {
-      "babel-plugin-root-import": {},
-      "node": {
-        "extensions": [".js", ".jsx"]
-      }
-    },
     "react": {
       "version": "detect"
     }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
-import ButtonSmall from './ButtonSmall';
+import Button from './Button';
 
 /**
  * Fetch the content and return the associated promise.
@@ -58,9 +58,9 @@ const Downloader = ({ filename, media }) => {
       {downloading ? (
         <span>{progress}%</span>
       ) : (
-        <ButtonSmall disabled={!media.length} onClick={doDownload}>
+        <Button small disabled={!media.length} onClick={doDownload}>
           download all
-        </ButtonSmall>
+        </Button>
       )}
 
       {error ? <div>Error, please try again</div> : null}

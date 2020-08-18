@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid');
-const mongoose = require('~/lib/mongoose');
+const mongoose = require('../lib/mongoose');
 
 const { Schema } = mongoose;
 

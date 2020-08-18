@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import createApi from '~/lib/createApi';
-import hostFromReq from '~/lib/hostFromReq';
-import Layout from '~/components/Layout';
-import Logo from '~/components/Logo';
-import Uploader from '~/components/Uploader';
-import Downloader from '~/components/Downloader';
-import ButtonSmall from '~/components/ButtonSmall';
-import AlbumLink from '~/components/AlbumLink';
-import AlbumTitle from '~/components/AlbumTitle';
-import Media from '~/components/Media';
-import useInternetStatus from '~/lib/useInternetStatus';
+import createApi from '../../lib/createApi';
+import hostFromReq from '../../lib/hostFromReq';
+import Layout from '../../components/Layout';
+import Logo from '../../components/Logo';
+import Uploader from '../../components/Uploader';
+import Downloader from '../../components/Downloader';
+import Button from '../../components/Button';
+import AlbumLink from '../../components/AlbumLink';
+import AlbumTitle from '../../components/AlbumTitle';
+import Media from '../../components/Media';
+import useInternetStatus from '../../lib/useInternetStatus';
 
 function UploadPage({ host, request }) {
   if (!request) return null;
@@ -80,9 +80,7 @@ function UploadPage({ host, request }) {
 
       {isOnline ? (
         <>
-          {process.browser ? (
-            <Uploader requestId={request.slug} onChange={addMedia} />
-          ) : null}
+          <Uploader requestId={request.slug} onChange={addMedia} />
 
           <div className="flex justify-center mt-6">
             <Downloader filename={request.id} media={media} />
@@ -90,7 +88,7 @@ function UploadPage({ host, request }) {
             <div className="w-3" />
 
             <Link href="/">
-              <ButtonSmall>make a new album</ButtonSmall>
+              <Button small>make a new album</Button>
             </Link>
           </div>
         </>

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Widget } from '@uploadcare/react-widget';
 import { MdCameraAlt } from 'react-icons/md';
-import Button from '~/components/Button';
+import Button from './Button';
 
 if (process.browser) {
   window.UPLOADCARE_LOCALE_TRANSLATIONS = {
@@ -33,25 +33,29 @@ const Uploader = ({ onChange }) => {
 
   return (
     <>
+      <Button onClick={() => widgetApi.current.openDialog()}>
+        <span className="flex items-center justify-center space-x-3">
+          <MdCameraAlt className="-ml-1 text-2xl" />
+          <span>Add pictures</span>
+        </span>
+      </Button>
+
       <div>
-        <Button onClick={() => widgetApi.current.openDialog()}>
-          <span className="flex items-center justify-center space-x-3">
-            <MdCameraAlt className="-ml-1 text-2xl" />
-            <span>Add pictures</span>
-          </span>
-        </Button>
+        {process.browser ? (
+          <Widget
+            ref={widgetApi}
+            publicKey="3ee62abfc85924be3d0e"
+            multiple
+            systemDialog
+            imagesOnly
+            onFileSelect={async (filesInfo) => {
+              const files = await Promise.all(filesInfo.files());
+              onChange(files.map(fileInfoToMedia));
+            }}
+          />
+        ) : null}
       </div>
-      <Widget
-        ref={widgetApi}
-        publicKey="3ee62abfc85924be3d0e"
-        multiple
-        systemDialog
-        imagesOnly
-        onFileSelect={async (filesInfo) => {
-          const files = await Promise.all(filesInfo.files());
-          onChange(files.map(fileInfoToMedia));
-        }}
-      />
+
       <style jsx global>{`
         .uploadcare--widget {
           display: block;

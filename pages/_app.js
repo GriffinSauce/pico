@@ -3,7 +3,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import * as Sentry from '@sentry/node';
 
-import '~/styles/global.css';
+import '../styles/global.css';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
 Sentry.init({

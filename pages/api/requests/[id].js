@@ -1,4 +1,4 @@
-const Request = require('~/schemas/Request');
+const Request = require('../../../schemas/Request');
 
 module.exports = async (req, res) => {
   if (req.method === 'GET') {

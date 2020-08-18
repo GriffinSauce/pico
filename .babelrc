@@ -1,4 +1,3 @@
 {
-  "presets": ["next/babel"],
-  "plugins": ["babel-plugin-root-import", "add-react-displayname"]
+  "presets": ["next/babel"]
 }

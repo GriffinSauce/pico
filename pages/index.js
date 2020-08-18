@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Router from 'next/router';
 import { GoPlus } from 'react-icons/go';
-import Logo from '~/components/Logo';
-import Button from '~/components/Button';
-import Layout from '~/components/Layout';
+import Logo from '../components/Logo';
+import Button from '../components/Button';
+import Layout from '../components/Layout';
 
-import createApi from '~/lib/createApi';
-import hostFromReq from '~/lib/hostFromReq';
-import useInternetStatus from '~/lib/useInternetStatus';
+import createApi from '../lib/createApi';
+import hostFromReq from '../lib/hostFromReq';
+import useInternetStatus from '../lib/useInternetStatus';
 
 function Home({ host }) {
   const api = createApi({ host });

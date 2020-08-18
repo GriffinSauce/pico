@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Lightbox from 'react-image-lightbox';
-import MediaGrid from '~/components/MediaGrid';
+import MediaGrid from './MediaGrid';
 
 const Media = ({ media }) => {
   const [viewMediaIndex, setViewMediaIndex] = useState(null);
