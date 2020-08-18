@@ -1,9 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import copy from 'copy-to-clipboard';
-import ThemeContext from '~/contexts/ThemeContext';
 
 const AlbumLink = ({ children }) => {
-  const { theme } = useContext(ThemeContext);
   const [copied, setCopied] = useState(false);
 
   const copyLink = () => {
@@ -11,42 +9,21 @@ const AlbumLink = ({ children }) => {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
-    }, 1500);
+    }, 3000);
   };
 
   return (
     <>
-      <button type="button" onClick={copyLink}>
-        <div className="link">
+      <button
+        type="button"
+        className="flex flex-row items-center justify-between w-full px-4 py-3 space-x-3 text-sm border-2 rounded-lg focus:outline-none border-violet-700 hover:border-violet-400 focus:border-violet-400 bg-violet-700"
+        onClick={copyLink}
+      >
+        <div className="flex-shrink text-left truncate text-violet-200">
           {children.replace('https://', '').replace('http://', '')}
         </div>
-        <div className="cta">{copied ? 'copied!' : 'copy'}</div>
+        <div className="text-violet-400">{copied ? 'copied!' : 'copy'}</div>
       </button>
-      <style jsx>{`
-        button {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          padding: 12px 18px;
-          font-size: 14px;
-          background: #2a277c; /* TODO: Use calculation */
-          border: 1px solid #2a277c;
-          border-radius: 10px;
-          cursor: pointer;
-        }
-        button:focus {
-          outline: none;
-          border: 1px solid ${theme.color.action};
-        }
-        .link {
-          text-align: left;
-          color: #fff;
-        }
-        .cta {
-          color: ${theme.color.action};
-        }
-      `}</style>
     </>
   );
 };

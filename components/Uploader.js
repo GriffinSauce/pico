@@ -1,4 +1,7 @@
+import { useRef } from 'react';
 import { Widget } from '@uploadcare/react-widget';
+import { MdCameraAlt } from 'react-icons/md';
+import Button from '~/components/Button';
 
 if (process.browser) {
   window.UPLOADCARE_LOCALE_TRANSLATIONS = {
@@ -26,9 +29,20 @@ const fileInfoToMedia = (fileInfo) => ({
 });
 
 const Uploader = ({ onChange }) => {
+  const widgetApi = useRef();
+
   return (
     <>
+      <div>
+        <Button onClick={() => widgetApi.current.openDialog()}>
+          <span className="flex items-center justify-center space-x-3">
+            <MdCameraAlt className="-ml-1 text-2xl" />
+            <span>Add pictures</span>
+          </span>
+        </Button>
+      </div>
       <Widget
+        ref={widgetApi}
         publicKey="3ee62abfc85924be3d0e"
         multiple
         systemDialog
@@ -40,30 +54,11 @@ const Uploader = ({ onChange }) => {
       />
       <style jsx global>{`
         .uploadcare--widget {
+          display: block;
           width: 100%;
         }
-        .uploadcare--widget__button_type_open,
-        .uploadcare--widget__button_type_open:hover {
-          padding: 10px 20px;
-          font-size: 18px;
-          color: #fff;
-          background-color: #d900fc;
-          border: none;
-          border-radius: 100px;
-          cursor: pointer;
-        }
-        .uploadcare--widget__button_type_open:hover {
-          background-color: #c900ea;
-        }
-        .uploadcare--widget__button_type_open:before {
-          display: inline-block;
-          content: '';
-          height: 24px;
-          width: 24px;
-          background-image: url('/icon-camera.svg');
-          background-position: center;
-          vertical-align: middle;
-          margin: 0 10px 0 -4px;
+        .uploadcare--widget__button_type_open {
+          display: none;
         }
       `}</style>
     </>

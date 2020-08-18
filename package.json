@@ -15,7 +15,8 @@
     "test-watch": "NODE_ENV=test yarn run test --watch",
     "test-cover": "NODE_ENV=test yarn run test --coverage",
     "test-ci": "NODE_ENV=test yarn run test --ci --maxWorkers=4",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "@sentry/browser": "^5.15.5",
@@ -38,11 +39,13 @@
     "polished": "^3.6.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "react-image-lightbox": "^5.1.1",
     "react-inlinesvg": "^1.2.0",
     "react-input-autosize": "^2.2.2"
   },
   "devDependencies": {
+    "@storybook/react": "^6.0.10",
     "babel-plugin-root-import": "^6.5.0",
     "eslint": "^7.0.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -55,6 +58,8 @@
     "eslint-plugin-react-hooks": "^4.0.2",
     "jest": "^26.0.1",
     "jest-environment-node": "^26.0.1",
-    "prettier": "^2.0.5"
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.6.2"
   }
 }

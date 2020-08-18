@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/service-worker.js",
+      "destination": "/_next/static/service-worker.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=43200, immutable"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "MONGO_PASSWORD": "@mongo_password",
+    "MONGO_USER": "@mongo_user"
+  }
+}
