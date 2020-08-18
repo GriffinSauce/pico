@@ -34,10 +34,8 @@ const Uploader = ({ onChange }) => {
   return (
     <>
       <Button onClick={() => widgetApi.current.openDialog()}>
-        <span className="flex items-center justify-center space-x-3">
-          <MdCameraAlt className="-ml-1 text-2xl" />
-          <span>Add pictures</span>
-        </span>
+        <MdCameraAlt className="-ml-1 text-2xl" />
+        <span>Add pictures</span>
       </Button>
 
       <div>
