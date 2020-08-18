@@ -44,6 +44,7 @@ class PicoApp extends App {
             color="#5bbad5"
           />
           <link rel="shortcut icon" href="/icon/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
           <meta name="msapplication-TileColor" content="#2d89ef" />
           <meta name="msapplication-config" content="/icon/browserconfig.xml" />
           <meta name="theme-color" content="#020021" />
