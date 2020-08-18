@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Router from 'next/router';
 import { GoPlus } from 'react-icons/go';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
 import Layout from '../components/Layout';
@@ -41,7 +42,10 @@ function Home({ host }) {
       </h1>
       <Button onClick={createAndGoToAlbum} disabled={loading || !isOnline}>
         {loading ? (
-          'Loading'
+          <>
+            <AiOutlineLoading3Quarters className="-ml-1 animate-spin" />
+            <span>Loading</span>
+          </>
         ) : (
           <>
             <GoPlus className="-ml-1" />
