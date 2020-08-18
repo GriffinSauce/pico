@@ -2,7 +2,9 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import * as Sentry from '@sentry/node';
-import GlobalStyles from '~/components/GlobalStyles';
+
+import '~/styles/global.css';
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 
 Sentry.init({
   dsn: 'https://225c0c41e53e4852a221b260bd070b27@sentry.io/1760702',
@@ -48,9 +50,12 @@ class PicoApp extends App {
           <meta name="msapplication-TileColor" content="#2d89ef" />
           <meta name="msapplication-config" content="/icon/browserconfig.xml" />
           <meta name="theme-color" content="#020021" />
-        </Head>
 
-        <GlobalStyles />
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato|Oswald&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
 
         <Component {...modifiedPageProps} />
       </>
