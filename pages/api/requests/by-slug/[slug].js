@@ -1,6 +1,6 @@
-const Request = require('../../../../schemas/Request');
+import Request from '../../../../schemas/Request';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (req.method === 'GET') {
     const {
       query: { slug },

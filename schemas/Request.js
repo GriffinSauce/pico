@@ -1,5 +1,5 @@
-const { nanoid } = require('nanoid');
-const mongoose = require('../lib/mongoose');
+import { nanoid } from 'nanoid';
+import mongoose from '../lib/mongoose';
 
 const { Schema } = mongoose;
 
@@ -48,4 +48,4 @@ Request.virtual('uri').get(function generateSlug() {
 delete mongoose.connection.models[MODEL_NAME]; // Prevent error "Cannot overwrite model once compiled"
 const Model = mongoose.model(MODEL_NAME, Request);
 
-module.exports = Model;
+export default Model;

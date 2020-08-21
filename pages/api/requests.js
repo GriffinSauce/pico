@@ -1,6 +1,6 @@
-const Request = require('../../schemas/Request');
+import Request from '../../schemas/Request';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (req.method !== 'POST') return res.status({ status: 404 }).send();
 
   const request = new Request(req.body);
