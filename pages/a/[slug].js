@@ -5,7 +5,7 @@ import createApi from '../../lib/createApi';
 import hostFromReq from '../../lib/hostFromReq';
 import Layout from '../../components/Layout';
 import Logo from '../../components/Logo';
-import Uploader from '../../components/FirebaseUploader';
+import Uploader from '../../components/Uploader';
 import Downloader from '../../components/Downloader';
 import Button from '../../components/Button';
 import AlbumLink from '../../components/AlbumLink';
