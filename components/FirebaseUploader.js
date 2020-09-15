@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import { MdCameraAlt } from 'react-icons/md';
+import { FiX } from 'react-icons/fi';
 import { storage } from '../lib/firebase';
+import ProgressCircle from './ProgressCircle';
+import Button from './Button';
 
 const sum = (arr) => arr.reduce((newSum, num) => newSum + (num || 0), 0);
 
@@ -12,7 +16,6 @@ const fileToMedia = (file) => ({
 const ImageUpload = ({ onChange }) => {
   const inputRef = useRef(null);
   const [files, setFiles] = useState([]);
-  console.log('files', files);
 
   // Compute avg. total progress
   const progress = Math.round(
@@ -92,12 +95,38 @@ const ImageUpload = ({ onChange }) => {
     });
   };
 
+  const onSelectFiles = () => {
+    inputRef.current.click();
+  };
+
   return (
-    <div className="grid gap-3">
-      <progress value={progress} max="100" />
-      <input type="file" multiple ref={inputRef} onChange={handleChange} />
-      {files.length ? <button onClick={onCancel}>cancel</button> : null}
-    </div>
+    <>
+      <input
+        className="hidden"
+        type="file"
+        multiple
+        accept="image/*,video/*"
+        ref={inputRef}
+        onChange={handleChange}
+      />
+
+      {files.length ? (
+        <div className="flex items-center justify-center space-x-3">
+          <div className="flex-shrink-0 w-10 h-10">
+            <ProgressCircle percentage={progress} />
+          </div>
+          <Button size="sm" onClick={onCancel}>
+            <FiX className="-ml-1 text-xl" />
+            <span>cancel</span>
+          </Button>
+        </div>
+      ) : (
+        <Button onClick={onSelectFiles}>
+          <MdCameraAlt className="-ml-1 text-2xl" />
+          <span>Add pictures</span>
+        </Button>
+      )}
+    </>
   );
 };
 

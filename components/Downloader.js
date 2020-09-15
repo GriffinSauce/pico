@@ -58,7 +58,12 @@ const Downloader = ({ filename, media }) => {
       {downloading ? (
         <span>{progress}%</span>
       ) : (
-        <Button small disabled={!media.length} onClick={doDownload}>
+        <Button
+          size="sm"
+          color="ghost"
+          disabled={!media.length}
+          onClick={doDownload}
+        >
           download all
         </Button>
       )}

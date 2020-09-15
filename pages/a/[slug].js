@@ -88,7 +88,9 @@ function UploadPage({ host, request }) {
             <div className="w-3" />
 
             <Link href="/">
-              <Button small>make a new album</Button>
+              <Button size="sm" color="ghost">
+                make a new album
+              </Button>
             </Link>
           </div>
         </>
