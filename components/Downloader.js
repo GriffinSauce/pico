@@ -3,6 +3,7 @@ import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import Button from './Button';
+import ProgressCircle from './ProgressCircle';
 
 /**
  * Fetch the content and return the associated promise.
@@ -40,7 +41,7 @@ const Downloader = ({ filename, media }) => {
     // when everything has been downloaded, we can trigger the download
     zip
       .generateAsync({ type: 'blob' }, function updateCallback(metadata) {
-        setProgress(metadata.percent || 0);
+        setProgress(Math.round(metadata.percent) || 0);
       })
       .then(
         (blob) => {
@@ -56,7 +57,9 @@ const Downloader = ({ filename, media }) => {
   return (
     <>
       {downloading ? (
-        <span>{progress}%</span>
+        <div className="flex-shrink-0 w-10 h-10">
+          <ProgressCircle percentage={progress} />
+        </div>
       ) : (
         <Button
           size="sm"
