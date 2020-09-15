@@ -14,7 +14,13 @@ const MediaGrid = ({ media, onClickItem }) => {
                 onClickItem(index);
               }}
             >
-              <img alt="" src={`${item.url}-/scale_crop/230x230/center/`} />
+              <img
+                alt=""
+                loading="lazy"
+                src={`https://atmsfyzccp.cloudimg.io/v7/${encodeURIComponent(
+                  item.url,
+                )}?ci_url_encoded=1&width=230&height=230&grey=1`}
+              />
             </button>
           </figure>
         ))}

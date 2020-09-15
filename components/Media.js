@@ -31,7 +31,7 @@ const Media = ({ media }) => {
             <a
               key="download-btn"
               className="px-3 py-2 mr-3 text-sm leading-none text-gray-300 border border-gray-300 rounded hover:border-white hover:text-white"
-              href={`${media[viewMediaIndex].url}-/inline/no/`}
+              href={media[viewMediaIndex].url}
             >
               download
             </a>,
