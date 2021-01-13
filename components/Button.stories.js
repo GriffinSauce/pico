@@ -17,10 +17,10 @@ export const WithIcon = () => (
 
 export const Disabled = () => <Button disabled>Hello Button</Button>;
 
-export const Small = () => <Button small>Hello small Button</Button>;
+export const Small = () => <Button size="sm">Hello small Button</Button>;
 
 export const SmallDisabled = () => (
-  <Button disabled small>
+  <Button disabled size="sm">
     Hello small Button
   </Button>
 );
