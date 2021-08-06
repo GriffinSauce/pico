@@ -1,4 +1,4 @@
-# pico.link
+# pico
 
 The easiest way to share pictures.
 
