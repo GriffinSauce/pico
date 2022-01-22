@@ -29,7 +29,7 @@
     "jszip": "^3.5.0",
     "jszip-utils": "^0.1.0",
     "mongoose": "5.9",
-    "nanoid": "^3.1.12",
+    "nanoid": "^3.1.31",
     "next": "^9.5.2",
     "next-offline": "^5.0.2",
     "react": "^16.13.1",
